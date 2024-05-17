@@ -9,11 +9,13 @@
 
 #include "../IDisplay/IDisplay.hpp"
 #include "../Text/Text.hpp"
+#include "../Object/Object.hpp"
+#include "../Music/Music.hpp"
 #include "Button.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
-class Menu : public IDisplay, public Button, public Text{
+class Menu : public IDisplay, public Button, public Text, public Object, public Music{
     public:
         Menu();
         ~Menu();
@@ -29,5 +31,8 @@ class Menu : public IDisplay, public Button, public Text{
         Button _settings;
         Text _tittle;
         Text _tittle2;
+        Object _background;
+        Object _jetback;
+        Music _music;
     private:
 };

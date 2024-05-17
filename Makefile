@@ -10,8 +10,10 @@ SRC		=		src/main.cpp	\
 				src/Player/Player.cpp	\
 				src/Menu/Menu.cpp	\
 				src/Menu/Button.cpp	\
+				src/Object/Object.cpp	\
 				src/Factory/Factory.cpp \
-				src/Text/Text.cpp
+				src/Text/Text.cpp \
+				src/Music/Music.cpp
 
 OBJ		=		$(SRC:.cpp=.o)
 
