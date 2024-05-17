@@ -27,8 +27,8 @@ void Player::update(float deltaTime) {
     sprite.move(velocity * deltaTime);
 
     sf::Vector2f position = sprite.getPosition();
-    if (position.y >= 770) {
-        position.y = 770;
+    if (position.y >= 760) {
+        position.y = 760;
         sprite.setPosition(position);   
         velocity.y = 0;
     }
