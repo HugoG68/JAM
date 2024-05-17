@@ -15,7 +15,7 @@ int main()
     Menu menu;
     menu.run();
     
-    // Entity::Player a;
+    Entity::Player a;
     
     if (!menu.isClosed()) {
         Game game;

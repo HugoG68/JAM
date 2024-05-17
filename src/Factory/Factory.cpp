@@ -9,10 +9,14 @@
 
 Factory::Factory()
 {
-    _map[Entity::EntityType::Player] = []() {return std::make_unique<Entity::IEntity>();};
+    _map[Entity::EntityType::PlayerType] = []() {return std::make_unique<Entity::Player>();};
 }
 
 std::unique_ptr<Entity::IEntity> Factory::create(Entity::EntityType Type)
 {
-    return std::make_unique<Entity::IEntity>();
+    auto it = _map.find(Type);
+    if (it != _map.end()) {
+        return it->second();
+    }
+    return nullptr;
 }
