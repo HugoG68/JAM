@@ -9,7 +9,8 @@
 
 Factory::Factory()
 {
-    _map[Entity::EntityType::PlayerType] = []() {return std::make_unique<Entity::Player>();};
+    _map[Entity::EntityType::PlayerType] = []() {return std::make_unique<Entity::Player>(); };
+    _map[Entity::EntityType::ObstacleType] = []() {return std::make_unique<Entity::Obstacle>(); };
 }
 
 std::unique_ptr<Entity::IEntity> Factory::create(Entity::EntityType Type)
