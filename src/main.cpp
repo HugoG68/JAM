@@ -8,11 +8,14 @@
 #include <iostream>
 #include "Game/Game.hpp"
 #include "Menu/Menu.hpp"
+#include "Entity/Player.hpp"
 
 int main()
 {
     Menu menu;
     menu.run();
+    
+    // Entity::Player a;
     
     if (!menu.isClosed()) {
         Game game;

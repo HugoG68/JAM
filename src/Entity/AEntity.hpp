@@ -14,8 +14,8 @@ namespace Entity
 class AEntity : public IEntity
 {
 private:
-    double _speed;
     std::tuple<double, double> _pos;
+    double _speed;
 
 public:
     AEntity() :_pos(start_pos()), _speed(speed()) {};
@@ -54,7 +54,7 @@ public:
         throw Error(Error::Type::NotInit);
     };
     virtual EntityType get_type() const {
-        return Unknow;
+        return UnknowType;
     };
 };
 

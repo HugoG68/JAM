@@ -7,7 +7,12 @@
 
 #include "Factory.hpp"
 
-IEntity *AFactory::create()
+Factory::Factory()
 {
-    return std::make_unique<IEntity>().get();
+    _map[Entity::EntityType::Player] = []() {return std::make_unique<Entity::IEntity>();};
+}
+
+std::unique_ptr<Entity::IEntity> Factory::create(Entity::EntityType Type)
+{
+    return std::make_unique<Entity::IEntity>();
 }

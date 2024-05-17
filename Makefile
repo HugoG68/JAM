@@ -10,6 +10,7 @@ SRC		=		src/main.cpp	\
 				src/Player/Player.cpp	\
 				src/Menu/Menu.cpp	\
 				src/Menu/Button.cpp	\
+				src/Factory/Factory.cpp
 
 OBJ		=		$(SRC:.cpp=.o)
 
