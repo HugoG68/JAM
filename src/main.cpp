@@ -7,13 +7,16 @@
 
 #include <iostream>
 #include "Game/Game.hpp"
+#include "Menu/Menu.hpp"
 
-int main(int ac, char **av)
-{    
-    if (ac == 1) {
+int main()
+{
+    Menu menu;
+    menu.run();
+    
+    if (!menu.isClosed()) {
         Game game;
         game.run();
-        return 0;
-    }    
+    }
     return 0;
 }

@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** CrimsonClicker
+** Jam
 ** File description:
 ** Game
 */
