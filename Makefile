@@ -15,7 +15,7 @@ OBJ		=		$(SRC:.cpp=.o)
 
 NAME	=		Jetpack
 
-CXXFLAGS	+=		-g  -std=c++20 -Wall -Wextra -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lm
+CXXFLAGS	+=		-g -I./src -std=c++20 -Wall -Wextra -Werror -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lm
 
 all:	$(OBJ)
 	g++ -o $(NAME) $(OBJ) $(CXXFLAGS)
