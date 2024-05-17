@@ -9,7 +9,6 @@
 
 Text::Text()
 {
-    _font.loadFromFile("assets/Fonts/Default.ttf");
     _text.setFont(_font);
     _text.setString("Default");
     _text.setFillColor(sf::Color::White);
@@ -20,7 +19,6 @@ Text::Text()
 
 Text::Text(std::string str, sf::Color color, int x, int y, sf::Vector2f scale)
 {
-    _font.loadFromFile("assets/Fonts/Default.ttf");
     _text.setFont(_font);
     _text.setString(str);
     _text.setFillColor(color);
