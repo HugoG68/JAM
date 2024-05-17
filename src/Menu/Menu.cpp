@@ -11,7 +11,9 @@ Menu::Menu() : _window(sf::VideoMode(1920, 1080), "JetPack Menu"),
     _close(true),
     _start("assets/Button/Start Button.png", 950, 500, 1.0, 1.0),
     _quit("assets/Button/Quit Button.png", 950, 800, 1.0, 1.0),
-    _settings("assets/Button/Settings Button.png", 950, 650, 1.0, 1.0)
+    _settings("assets/Button/Settings Button.png", 950, 650, 1.0, 1.0),
+    _tittle("Olympic", "assets/Fonts/earwig factory rg.otf", sf::Color::Red, 630, 50, sf::Vector2f(1.2, 1.2)),
+    _tittle2("Jet", "assets/Fonts/earwig factory rg.otf", sf::Color::Blue, 810, 230, sf::Vector2f(1.0, 1.0))
 {
 
 }
@@ -36,6 +38,8 @@ void Menu::update()
     _start.display(_window);
     _quit.display(_window);
     _settings.display(_window);
+    _tittle.draw(_window);
+    _tittle2.draw(_window);
     _window.display();
 
     if (_start.isClicked(_window)) {

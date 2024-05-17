@@ -8,11 +8,12 @@
 #pragma once
 
 #include "../IDisplay/IDisplay.hpp"
+#include "../Text/Text.hpp"
 #include "Button.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
-class Menu : public IDisplay, public Button{
+class Menu : public IDisplay, public Button, public Text{
     public:
         Menu();
         ~Menu();
@@ -26,5 +27,7 @@ class Menu : public IDisplay, public Button{
         Button _start;
         Button _quit;
         Button _settings;
+        Text _tittle;
+        Text _tittle2;
     private:
 };
