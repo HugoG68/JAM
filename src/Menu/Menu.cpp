@@ -18,7 +18,12 @@ Menu::Menu() : _window(sf::VideoMode(1920, 1080), "JetPack Menu", sf::Style::Def
     _jetback("assets/solo_man_jetpack.png", 400, 100, 0.6, 0.6, 30),
     _music("assets/sous_le_ciel_de_paris.ogg")
 {
-
+    sf::Image icon;
+    if (!icon.loadFromFile("assets/logo.png")) {
+        std::cerr << "Erreur de chargement de l'icône." << std::endl;
+    } else {
+        _window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+    }
 }
 
 Menu::~Menu()
