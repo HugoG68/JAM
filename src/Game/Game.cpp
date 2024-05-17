@@ -9,9 +9,9 @@
 #include "../Player/Player.hpp"
 
 Game::Game() : _window(sf::VideoMode(1920, 1080), "Crimson Clicker"), _score(0),
-    _clickValue(1)
+    _clickValue(1),
+    p("assets/man_sans_flamme.png")
 {
-    Player p("ttt");
     _window.setFramerateLimit(60);
 }
 
@@ -31,7 +31,9 @@ void Game::run()
 
 void Game::update()
 {
-    _window.clear(); 
+    _window.clear();
+    p.draw(_window);
+    p.update(0.025);
     _window.display();
 }
 

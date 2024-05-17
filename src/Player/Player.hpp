@@ -11,12 +11,13 @@
 
 class Player {
 public:
-    Player(sf::Texture texture) {}
-    void update(float deltaTime) {}
-    void draw(sf::RenderWindow window) {}
+    Player(std::string textureurl);
+    void update(float deltaTime);
+    void draw(sf::RenderWindow &window);
 
 private:
     sf::Sprite sprite;
+    sf::Texture texture;
     sf::Vector2f velocity{0, 0};
-    const float gravity = 500.0f;
+    float gravity = 500.0f;
 };

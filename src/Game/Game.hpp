@@ -8,8 +8,9 @@
 
 #include "../IDisplay/IDisplay.hpp"
 #include "../IFeature/IFeature.hpp"
+#include "../Player/Player.hpp"
 
-class Game : public IDisplay, public IFeature{
+class Game : public IDisplay, public IFeature {
     public:
         Game();
         ~Game();
@@ -27,5 +28,6 @@ class Game : public IDisplay, public IFeature{
         sf::RenderWindow _window;
         int _score;
         int _clickValue;
+        Player p;
     private:
 };
