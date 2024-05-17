@@ -30,7 +30,6 @@ Text::Text(std::string str, sf::Color color, int x, int y, sf::Vector2f scale)
 
 Text::Text(std::string str, sf::Color color, int x, int y, int size)
 {
-    _font.loadFromFile("assets/Fonts/Default.ttf");
     _text.setFont(_font);
     _text.setString(str);
     _text.setFillColor(color);
