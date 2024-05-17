@@ -14,8 +14,8 @@ namespace Entity
 {
     
 typedef enum {
-    Unknow = -1,
-    Player,
+    UnknowType = -1,
+    PlayerType,
 } EntityType;
 
 

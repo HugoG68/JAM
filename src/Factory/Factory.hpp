@@ -8,15 +8,19 @@
 #ifndef FACTORY_HPP_
     #define FACTORY_HPP_
 
-    #include "IFactory.hpp"
+    #include <map>
     #include <memory>
+    #include <functional>
+    #include <Entity/IEntity.hh>
 
-class AFactory : public IFactory {
-    public:
-        IEntity *create() override;
-
-    protected:
+class Factory {
     private:
+        std::map<Entity::EntityType, std::function<std::unique_ptr<Entity::IEntity>>> _map;
+    public:
+        Factory();
+        ~Factory() = default;
+        std::unique_ptr<Entity::IEntity> create(Entity::EntityType Type);
+
 };
 
 #endif /* !FACTORY_HPP_ */
