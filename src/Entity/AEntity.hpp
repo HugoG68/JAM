@@ -18,7 +18,7 @@ private:
     double _speed;
 
 public:
-    AEntity() :_pos(start_pos()), _speed(speed()) {};
+    AEntity(std::tuple<double, double> pos, double speed) :_pos(pos), _speed(speed) {};
     ~AEntity() = default;
     void go_up(void) {
         double pos_y = std::get<1>(_pos);
@@ -46,12 +46,6 @@ public:
     }
     virtual std::tuple<double, double> get_pos() const {
         return _pos;
-    };
-    virtual std::tuple<double, double> start_pos() const {
-        throw Error(Error::Type::NotInit);
-    };
-    virtual double speed() const {
-        throw Error(Error::Type::NotInit);
     };
     virtual EntityType get_type() const {
         return UnknowType;

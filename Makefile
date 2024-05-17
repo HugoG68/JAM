@@ -11,6 +11,7 @@ SRC		=		src/main.cpp	\
 				src/Menu/Menu.cpp	\
 				src/Menu/Button.cpp	\
 				src/Factory/Factory.cpp \
+				src/Text/Text.cpp
 
 OBJ		=		$(SRC:.cpp=.o)
 

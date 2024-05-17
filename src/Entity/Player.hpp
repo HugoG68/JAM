@@ -7,16 +7,10 @@ namespace Entity
 class Player : public AEntity
 {
 public:
-    EntityType get_type() const override {
+    EntityType get_type() const {
         return PlayerType;
     };
-    std::tuple<double, double> start_pos() const override {
-        return std::tuple<double, double>({0.0, 0.0});
-    };
-    double speed() const override {
-        return 0.001;
-    };
-    Player() {};
+    Player(): AEntity({0.0, 0.0}, 0.001) {};
     ~Player() = default;
 };
 
