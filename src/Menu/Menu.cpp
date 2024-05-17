@@ -14,7 +14,7 @@ Menu::Menu() : _window(sf::VideoMode(1920, 1080), "JetPack Menu", sf::Style::Def
     _settings("assets/Button/Settings Button.png", 950, 650, 1.0, 1.0),
     _tittle("Olympic", "assets/Fonts/earwig factory rg.otf", sf::Color::Blue, 630, 10, sf::Vector2f(1.2, 1.2)),
     _tittle2("Jet", "assets/Fonts/earwig factory rg.otf", sf::Color::Blue, 810, 180, sf::Vector2f(1.0, 1.0)),
-    _background("assets/background_menu.png", 0, 0, 1.3, 1.2),
+    _background("assets/background_menu.png", 0, -30, 1.3, 1.2),
     _jetback("assets/solo_man_jetpack.png", 400, 100, 0.6, 0.6, 30),
     _music("assets/sous_le_ciel_de_paris.ogg")
 {
