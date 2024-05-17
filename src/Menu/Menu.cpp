@@ -7,7 +7,7 @@
 
 #include "Menu.hpp"
 
-Menu::Menu() : _window(sf::VideoMode(1920, 1080), "JetPack Menu"),
+Menu::Menu() : _window(sf::VideoMode(1920, 1080), "JetPack Menu", sf::Style::Default),
     _close(true),
     _start("assets/Button/Start Button.png", 950, 500, 1.0, 1.0),
     _quit("assets/Button/Quit Button.png", 950, 800, 1.0, 1.0),
