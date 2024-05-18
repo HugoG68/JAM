@@ -54,3 +54,14 @@ void Player::update(float deltaTime) {
 void Player::draw(sf::RenderWindow &window) {
     window.draw(sprite);
 }
+
+void Player::setTexture(std::string textureurl) {
+    if (texture.loadFromFile(textureurl)) {
+        sprite.setTexture(texture);
+        sprite.setTextureRect(sf::IntRect(0, 0, texture.getSize().x, texture.getSize().y));
+    }
+}
+
+void Player::setScale(float x, float y) {
+    sprite.setScale(x, y);
+}

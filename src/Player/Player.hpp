@@ -15,6 +15,8 @@ public:
     Player(std::string textureurl);
     void update(float deltaTime);
     void draw(sf::RenderWindow &window);
+    void setTexture(std::string textureurl);
+    void setScale(float x, float y);
 
 private:
     sf::Sprite sprite;

@@ -12,6 +12,7 @@
 #include "../Object/Object.hpp"
 #include "../Text/Text.hpp"
 #include "../Factory/Factory.hpp"
+#include "../DeadPage/DeadPage.hpp"
 #include <vector>
 #include <memory>
 #include <algorithm>
@@ -25,6 +26,7 @@ class Game : public IDisplay, public IFeature, public Object, public Text {
         void run() override;
         void update() override;
         void handleInput() override;
+        bool isClosed() override;
 
         void addScore(int value) override;
         int getScore() const override;
@@ -34,23 +36,27 @@ class Game : public IDisplay, public IFeature, public Object, public Text {
 
         void displayObstacle(std::tuple<double, double> pos, Entity::EntityType type);
         void updateObstacles();
-
-    protected:
         sf::RenderWindow _window;
         int _score;
         int _clickValue;
         Player p;
+        Object _background;
+        Object _background2;
+        Object _background3;
+        int _multiplier;
+        Text _scoretxt;
+        sf::Clock deathClock;
+        bool _close;
+        bool deathClockStarted;
+
+    protected:
+        
         std::vector<std::unique_ptr<Entity::IEntity>> _obstacles;
         sf::Clock _obstacleSpawnClock;
         sf::Clock _fuelSpawnClock;
         sf::SoundBuffer _soundBuffer;
         sf::Sound _sound;
-        Object _background;
-        Object _background2;
-        Object _background3;
         sf::Clock _scoreClock;
-        int _multiplier;
-        Text _scoretxt;
     private:
         sf::Texture obstacleTexture;
         sf::Texture fuelTexture;

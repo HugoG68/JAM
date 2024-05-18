@@ -9,14 +9,16 @@
 
 Factory factory;
 
-Game::Game(int multiplier) : _window(sf::VideoMode(1920, 1080), "Crimson Clicker"), _score(0),
+Game::Game(int multiplier) : _window(sf::VideoMode(1920, 1080), "Olympic Jet"), _score(0),
     _clickValue(1),
     p("assets/man_sans_flamme.png"),
     _background("assets/Background_1.png", 0, 0, 1.0, 1.0),
     _background2("assets/Background_2.png", 1920, 0, 1.0, 1.0),
     _background3("assets/Background_3.png", 3840, 0, 1.0, 1.0),
     _multiplier(multiplier),
-    _scoretxt(".", "assets/Fonts/Power Punchy.otf", sf::Color::Black, 50, 10, sf::Vector2f(0.35, 0.35))
+    _scoretxt(".", "assets/Fonts/Power Punchy.otf", sf::Color::Black, 50, 10, sf::Vector2f(0.35, 0.35)),
+    _close(true),
+    deathClockStarted(false)
 {
     if (!_soundBuffer.loadFromFile("assets/jetpack.ogg")) {
         std::cerr << "Critical Error: Failed to load sound file 'assets/sound.ogg'. Exiting." << std::endl;
@@ -133,9 +135,20 @@ void Game::updateObstacles()
         _fuelSpawnClock.restart();
         _obstacles.push_back(factory.create(Entity::EntityType::FuelType));
     }
-    if (p_math.is_alive() == false)
+
+    if (!p_math.is_alive())
     {
-        _window.close();
+        p.setTexture("assets/dead.png");
+        p.setScale(1.2, 1.2);
+        _window.display();
+        if (!deathClockStarted) {
+            deathClock.restart();
+            deathClockStarted = true;
+        }
+        if (deathClock.getElapsedTime().asSeconds() >= 7) {
+            _close = false;
+            _window.close();
+        }
     }
 }
 
@@ -196,4 +209,9 @@ void Game::setClickValue(int value)
 int Game::getClickValue() const
 {
     return _clickValue;
+}
+
+bool Game::isClosed()
+{
+    return _close;
 }
