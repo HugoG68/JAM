@@ -20,4 +20,13 @@ private:
     sf::Texture texture;
     sf::Vector2f velocity{0, 0};
     float gravity = 500.0f;
+
+    sf::Texture jetpackTexture;
+    sf::Texture runTexture;
+    int frameWidth;
+    int frameHeight;
+    int currentFrame;
+    float animationTimer;
+    float animationSpeed;
+    void updateAnimation(float deltaTime);
 };
