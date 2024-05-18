@@ -14,6 +14,7 @@
 #include <vector>
 #include <memory>
 #include <algorithm>
+#include <SFML/Audio.hpp>
 
 class Game : public IDisplay, public IFeature, public Object {
     public:
@@ -42,5 +43,7 @@ class Game : public IDisplay, public IFeature, public Object {
         Object _background;
         std::vector<std::unique_ptr<Entity::IEntity>> _obstacles;
         sf::Clock _obstacleSpawnClock;
+        sf::SoundBuffer _soundBuffer;
+        sf::Sound _sound;
     private:
 };

@@ -14,6 +14,12 @@ Game::Game(int multiplier) : _window(sf::VideoMode(1920, 1080), "Crimson Clicker
     p("assets/man_sans_flamme.png"),
     _background("assets/Background.png", 0, 0, 1.2, 1.0)
 {
+    if (!_soundBuffer.loadFromFile("assets/jetpack.ogg")) {
+        std::cerr << "Critical Error: Failed to load sound file 'assets/sound.ogg'. Exiting." << std::endl;
+        std::exit(EXIT_FAILURE);
+    }
+    _sound.setBuffer(_soundBuffer);
+    _sound.setLoop(true);
     _window.setFramerateLimit(60);
     _multiplier = multiplier;
 }
@@ -87,6 +93,15 @@ void Game::handleInput()
     while (_window.pollEvent(event)) {
         if (event.type == sf::Event::Closed)
             _window.close();
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        if (_sound.getStatus() != sf::Sound::Playing) {
+            _sound.play();
+        }
+    } else {
+        if (_sound.getStatus() == sf::Sound::Playing) {
+            _sound.stop();
+        }
     }
 }
 
