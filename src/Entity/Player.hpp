@@ -77,7 +77,7 @@ public:
     }
 
     void burn_fuel() {
-        _fuel -= 0.01;
+        _fuel -= 0.001;
     }
 }; 
 
