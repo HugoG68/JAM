@@ -117,7 +117,7 @@ void Game::updateObstacles()
             size = std::make_tuple(static_cast<double>(textureSize.x) / _numFrames, static_cast<double>(textureSize.y));
         }
         obstacle->set_size(size);
-        p_math.hits(obstacle);
+        p.hits(obstacle);
     }
 
     if (_obstacleSpawnClock.getElapsedTime().asSeconds() > 1)
@@ -130,10 +130,6 @@ void Game::updateObstacles()
     {
         _fuelSpawnClock.restart();
         _obstacles.push_back(factory.create(Entity::EntityType::FuelType));
-    }
-    if (p_math.is_alive() == false)
-    {
-        _window.close();
     }
 }
 
