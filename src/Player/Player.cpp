@@ -6,7 +6,7 @@
 
 #include "Player.hpp"
 
-Player::Player(std::string textureurl) : frameWidth(250), frameHeight(400), currentFrame(0), animationTimer(0.0f), animationSpeed(0.00f) {
+Player::Player(std::string textureurl) : frameWidth(284), frameHeight(267), currentFrame(0), animationTimer(10.0f), animationSpeed(0.40f), anim(false) {
     texture.loadFromFile(textureurl);
     sprite.setTexture(texture);
     sprite.setPosition(100, 300);
@@ -16,13 +16,18 @@ Player::Player(std::string textureurl) : frameWidth(250), frameHeight(400), curr
 
 void Player::update(float deltaTime) {
     sf::Vector2f position2 = sprite.getPosition();
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && position2.y < 720) {
         texture.loadFromFile("assets/solo_man_jetpack.png");
         sprite.setTexture(texture);
+        sf::Vector2f fly(0.55, 0.55);
+        sprite.setScale(fly);
+        sprite.setTextureRect(sf::IntRect(0, 0, texture.getSize().x, texture.getSize().y));
         velocity.y = -300;
-    } else if (position2.y > 650 && !sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+    } else if (position2.y > 720 && !sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        sf::Vector2f run(1.1, 1.1);
         texture.loadFromFile("assets/run.png");
         sprite.setTexture(texture);
+        sprite.setScale(run);
         animationTimer += deltaTime;
         if (animationTimer >= animationSpeed) {
             animationTimer = 0.0f;
@@ -32,6 +37,8 @@ void Player::update(float deltaTime) {
     } else {
         texture.loadFromFile("assets/man_sans_flamme.png");
         sprite.setTexture(texture);
+        sf::Vector2f fly(0.55, 0.55);
+        sprite.setScale(fly);
     }
     velocity.y += gravity * deltaTime;
     sprite.move(velocity * deltaTime);
