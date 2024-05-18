@@ -12,8 +12,8 @@ Factory factory;
 Game::Game(int multiplier) : _window(sf::VideoMode(1920, 1080), "Crimson Clicker"), _score(0),
     _clickValue(1),
     p("assets/man_sans_flamme.png"),
-    _background("assets/goodback1.jpeg", 0, 0, 1.9, 2.7),
-    _background2("assets/goodback1.jpeg", 1920, 0, 1.9, 2.7),
+    _background("assets/Background_1.png", 0, 0, 1.0, 1.0),
+    _background2("assets/Background_2.png", 1920, 0, 1.0, 1.0),
     _multiplier(multiplier),
     _scoretxt(".", "assets/Fonts/Power Punchy.otf", sf::Color::Black, 50, 10, sf::Vector2f(0.35, 0.35))
 {
