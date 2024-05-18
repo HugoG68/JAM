@@ -41,6 +41,9 @@ void Game::run()
 {
     while (_window.isOpen())
     {
+        sf::Vector2f backgroundPosition = _background.getPosition();
+         backgroundPosition.x -= 1.0f;
+         _background.setPosition(backgroundPosition);
         handleInput();
         update();
     }
