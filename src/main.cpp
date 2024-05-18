@@ -18,7 +18,7 @@ int main()
     Entity::Player a;
     
     if (!menu.isClosed()) {
-        Game game;
+        Game game(DifficultyType::Easy);
         game.run();
     }
     return 0;

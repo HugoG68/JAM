@@ -15,6 +15,13 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
+typedef enum {
+    UnknowType = 0,
+    Easy,
+    Medium,
+    Hard,
+} DifficultyType;
+
 class Menu : public IDisplay, public Button, public Text, public Object, public Music{
     public:
         Menu();

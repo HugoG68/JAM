@@ -9,12 +9,13 @@
 
 Factory factory;
 
-Game::Game() : _window(sf::VideoMode(1920, 1080), "Crimson Clicker"), _score(0),
+Game::Game(int multiplier) : _window(sf::VideoMode(1920, 1080), "Crimson Clicker"), _score(0),
     _clickValue(1),
     p("assets/man_sans_flamme.png"),
     _background("assets/Background.png", 0, 0, 1.2, 1.0)
 {
     _window.setFramerateLimit(60);
+    _multiplier = multiplier;
 }
 
 Game::~Game()
@@ -45,8 +46,9 @@ void Game::displayObstacle(std::tuple<double, double> pos)
 void Game::updateObstacles()
 {
     _obstacles.erase(
-        std::remove_if(_obstacles.begin(), _obstacles.end(), [](const std::unique_ptr<Entity::IEntity>& obstacle) {
-            obstacle->go_left();
+        std::remove_if(_obstacles.begin(), _obstacles.end(), [this](const std::unique_ptr<Entity::IEntity>& obstacle) {
+            for (int i = 0; i < (getMultiplier()); i++)
+                obstacle->go_left();
             if (std::get<0>(obstacle->get_pos()) <= 0.01) {
                 return true;
             }

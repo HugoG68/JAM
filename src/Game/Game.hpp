@@ -17,7 +17,7 @@
 
 class Game : public IDisplay, public IFeature, public Object {
     public:
-        Game();
+        Game(int multiplier);
         ~Game();
 
         void run() override;
@@ -28,6 +28,7 @@ class Game : public IDisplay, public IFeature, public Object {
         int getScore() const override;
         void setClickValue(int value) override;
         int getClickValue() const override;
+        int getMultiplier() const { return _multiplier;}
 
         void displayObstacle(std::tuple<double, double> pos);
         void updateObstacles();
@@ -36,6 +37,7 @@ class Game : public IDisplay, public IFeature, public Object {
         sf::RenderWindow _window;
         int _score;
         int _clickValue;
+        int _multiplier;
         Player p;
         Object _background;
         std::vector<std::unique_ptr<Entity::IEntity>> _obstacles;
