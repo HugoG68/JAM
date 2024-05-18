@@ -32,6 +32,8 @@ class Menu : public IDisplay, public Button, public Text, public Object, public 
         bool isClosed() const { return _close;};
         sf::RenderWindow _window;
         bool _close;
+        void cycleLevelTexture();
+        DifficultyType getCurrentDifficulty() { return _currentDifficulty; }
     protected:
         Button _start;
         Button _quit;
@@ -41,5 +43,17 @@ class Menu : public IDisplay, public Button, public Text, public Object, public 
         Object _background;
         Object _jetback;
         Music _music;
+        bool _settingsdraw;
+        Object _backsettings;
+        Button _closeSettings;
+        Button _soundBtn;
+        bool _isMusicPlaying;
+        Button _soundBtnMute;
+        Text _musicSettings;
+        Text _levelSettings;
+        Button _level;
+        int _currentLevelIndex;
+        sf::Texture _levelTextures[3];
+        DifficultyType _currentDifficulty;
     private:
 };
