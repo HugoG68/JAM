@@ -91,6 +91,10 @@ void Game::displayObstacle(std::tuple<double, double> pos, Entity::EntityType ty
 
 void Game::updateObstacles()
 {
+
+    p_math.set_pos(p.get_pos());
+    p_math.set_size(p.get_size());
+
     _obstacles.erase(
         std::remove_if(_obstacles.begin(), _obstacles.end(), [this](const std::unique_ptr<Entity::IEntity>& obstacle) {
             for (int i = 0; i < (getMultiplier()); i++)
@@ -106,18 +110,24 @@ void Game::updateObstacles()
     for (auto &obstacle : _obstacles)
     {
         displayObstacle(obstacle->get_pos(), obstacle->get_type());
+        p_math.hits(obstacle);
     }
 
     if (_obstacleSpawnClock.getElapsedTime().asSeconds() > 1)
     {
         _obstacleSpawnClock.restart();
-        _obstacles.push_back(factory.create(Entity::EntityType::ObstacleType));
+        auto obstacle = factory.create(Entity::EntityType::ObstacleType);
+        _obstacles.push_back(obstacle);
     }
 
     if (_fuelSpawnClock.getElapsedTime().asSeconds() > 2)
     {
         _fuelSpawnClock.restart();
         _obstacles.push_back(factory.create(Entity::EntityType::FuelType));
+    }
+    if (p_math.is_alive() == false)
+    {
+        _window.close();
     }
 }
 

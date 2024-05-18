@@ -6,8 +6,7 @@
 
 #include "Player.hpp"
 
-Player::Player(std::string textureurl) : frameWidth(284), frameHeight(267), currentFrame(0), animationTimer(10.0f), animationSpeed(0.40f), anim(false) {
-    texture.loadFromFile(textureurl);
+Player::Player(std::string textureurl) : AEntity({100.0, 300.0}, 0.01), frameWidth(284), frameHeight(267), currentFrame(0), animationTimer(10.0f), animationSpeed(0.40f), anim(false) {    texture.loadFromFile(textureurl);
     sprite.setTexture(texture);
     sprite.setPosition(100, 300);
     sf::Vector2f scale (0.5, 0.5);
@@ -49,6 +48,7 @@ void Player::update(float deltaTime) {
         sprite.setPosition(position);   
         velocity.y = 0;
     }
+    set_pos({position.x, position.y});
 }
 
 void Player::draw(sf::RenderWindow &window) {

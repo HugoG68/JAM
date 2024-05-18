@@ -55,6 +55,14 @@ public:
     std::tuple<double, double> get_size() const {
         return _size;
     };
+
+   void set_pos(std::tuple<double, double> pos) {
+        _pos = pos;
+    };
+    void set_size(std::tuple<double, double> size) {
+        _size = size;
+    };
+
 };
 
 } // namespace Entity

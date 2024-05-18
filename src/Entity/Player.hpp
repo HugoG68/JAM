@@ -1,6 +1,7 @@
 
 #pragma once
 #include "AEntity.hpp"
+#include <memory>
 
 namespace Entity
 {
@@ -25,12 +26,12 @@ public:
             AEntity::go_up();
         }
     }
-    void hits(Entity::IEntity &obstacle) {
+    void hits(const std::unique_ptr<Entity::IEntity> &obstacle) {
         std::tuple<double, double> player_pos = get_pos();
-        std::tuple<double, double> obstacle_pos = obstacle.get_pos();
+        std::tuple<double, double> obstacle_pos = obstacle->get_pos();
         std::tuple<double, double> player_size = get_size();
-        std::tuple<double, double> obstacle_size = obstacle.get_size();
-        EntityType obstacle_type = obstacle.get_type();
+        std::tuple<double, double> obstacle_size = obstacle->get_size();
+        EntityType obstacle_type = obstacle->get_type();
         if (!(std::get<0>(player_pos) < std::get<0>(obstacle_pos) + std::get<0>(obstacle_size) &&
             std::get<0>(player_pos) + std::get<0>(player_size) > std::get<0>(obstacle_pos) &&
             std::get<1>(player_pos) < std::get<1>(obstacle_pos) + std::get<1>(obstacle_size) &&
@@ -47,6 +48,7 @@ public:
                 _fuel = 1.0;
         }
     }
+
     bool is_alive() const {
         return _is_alive;
     }

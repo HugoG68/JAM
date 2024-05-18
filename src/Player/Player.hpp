@@ -10,7 +10,7 @@
 #include "../IFeature/IFeature.hpp"
 #include "Entity/Player.hpp"
 
-class Player {
+class Player:  public Entity::AEntity {
 public:
     Player(std::string textureurl);
     void update(float deltaTime);
@@ -31,5 +31,4 @@ private:
     float animationSpeed;
     void updateAnimation(float deltaTime);
     bool anim;
-    Entity::Player _player;
 };
