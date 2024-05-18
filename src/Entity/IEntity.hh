@@ -33,5 +33,7 @@ class IEntity {
         virtual EntityType get_type() const = 0;
         virtual std::tuple<double, double> get_pos() const = 0;
         virtual std::tuple<double, double> get_size() const = 0;
+        virtual void set_pos(std::tuple<double, double> pos) = 0;
+        virtual void set_size(std::tuple<double, double> size) = 0;
 };
 }
