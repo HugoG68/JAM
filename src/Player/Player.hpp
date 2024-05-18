@@ -15,7 +15,12 @@ public:
     Player(std::string textureurl);
     void update(float deltaTime);
     void draw(sf::RenderWindow &window);
-
+    int frameWidth;
+    int frameHeight;
+    std::tuple<double, double> get_pos() const {
+        sf::Vector2f position = sprite.getPosition();
+        return std::make_tuple(position.x, position.y);
+    }
 private:
     sf::Sprite sprite;
     sf::Texture texture;
@@ -24,8 +29,6 @@ private:
 
     sf::Texture jetpackTexture;
     sf::Texture runTexture;
-    int frameWidth;
-    int frameHeight;
     int currentFrame;
     float animationTimer;
     float animationSpeed;
