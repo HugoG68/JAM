@@ -12,7 +12,8 @@ Factory factory;
 Game::Game(int multiplier) : _window(sf::VideoMode(1920, 1080), "Crimson Clicker"), _score(0),
     _clickValue(1),
     p("assets/man_sans_flamme.png"),
-    _background("assets/Background.png", 0, 0, 1.2, 1.0)
+    _background("assets/goodback1.jpeg", 0, 0, 1.9, 2.7),
+    _background2("assets/goodback1.jpeg", 1920, 0, 1.9, 2.7)
 {
     if (!_soundBuffer.loadFromFile("assets/jetpack.ogg")) {
         std::cerr << "Critical Error: Failed to load sound file 'assets/sound.ogg'. Exiting." << std::endl;
@@ -42,8 +43,15 @@ void Game::run()
     while (_window.isOpen())
     {
         sf::Vector2f backgroundPosition = _background.getPosition();
-         backgroundPosition.x -= 1.0f;
-         _background.setPosition(backgroundPosition);
+        sf::Vector2f backgroundPosition2 = _background2.getPosition();   
+        backgroundPosition.x -= 1.0f;
+        backgroundPosition2.x -= 1.0f;
+        if (backgroundPosition.x <= -1920)
+            backgroundPosition.x = backgroundPosition2.x + 1920;
+        if (backgroundPosition2.x <= -1920)
+            backgroundPosition2.x = backgroundPosition.x + 1920;
+        _background.setPosition(backgroundPosition);
+        _background2.setPosition(backgroundPosition2);
         handleInput();
         update();
     }
@@ -90,6 +98,7 @@ void Game::update()
 {
     _window.clear();
     _background.drawBackground(_window);
+    _background2.drawBackground(_window);
     p.draw(_window);
     p.update(0.025);
 

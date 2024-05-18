@@ -144,7 +144,7 @@ void Menu::handleInput()
 
 void Menu::cycleLevelTexture()
 {
-    _currentLevelIndex = (_currentLevelIndex + 1) % 3; // Il y a 3 textures
+    _currentLevelIndex = (_currentLevelIndex + 1) % 3;
     _level._sprite.setTexture(_levelTextures[_currentLevelIndex]);
 
     switch (_currentLevelIndex) {

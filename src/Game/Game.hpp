@@ -45,6 +45,7 @@ class Game : public IDisplay, public IFeature, public Object {
         sf::Clock _obstacleSpawnClock;
         sf::SoundBuffer _soundBuffer;
         sf::Sound _sound;
+        Object _background2;
     private:
         sf::Texture obstacleTexture;
 };
