@@ -22,6 +22,14 @@ Game::Game(int multiplier) : _window(sf::VideoMode(1920, 1080), "Crimson Clicker
     _sound.setLoop(true);
     _window.setFramerateLimit(60);
     _multiplier = multiplier;
+    if (!obstacleTexture.loadFromFile("assets/balle_basket.png")) {
+        std::cerr << "Failed to load obstacle texture from file 'assets/balle_basket.png'" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    _sound.setBuffer(_soundBuffer);
+    _sound.setLoop(true);
+    _window.setFramerateLimit(60);
+    _multiplier = multiplier;
 }
 
 Game::~Game()
@@ -33,6 +41,9 @@ void Game::run()
 {
     while (_window.isOpen())
     {
+        sf::Vector2f backgroundPosition = _background.getPosition();
+         backgroundPosition.x -= 1.0f;
+         _background.setPosition(backgroundPosition);
         handleInput();
         update();
     }
@@ -40,13 +51,13 @@ void Game::run()
 
 void Game::displayObstacle(std::tuple<double, double> pos)
 {
-    sf::RectangleShape obstacle(sf::Vector2f(50, 50));
-
-    obstacle.setFillColor(sf::Color::Red);
-
+    sf::Sprite obstacle(obstacleTexture);
     obstacle.setPosition(std::get<0>(pos) * 1920, std::get<1>(pos) * 1080);
+
+    float scaleFactorX = 0.1f;
+    float scaleFactorY = 0.1f;
+    obstacle.setScale(scaleFactorX, scaleFactorY);
     _window.draw(obstacle);
-    return;
 }
 
 void Game::updateObstacles()

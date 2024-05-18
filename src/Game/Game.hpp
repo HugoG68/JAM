@@ -46,4 +46,5 @@ class Game : public IDisplay, public IFeature, public Object {
         sf::SoundBuffer _soundBuffer;
         sf::Sound _sound;
     private:
+        sf::Texture obstacleTexture;
 };

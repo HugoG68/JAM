@@ -29,7 +29,7 @@ class Menu : public IDisplay, public Button, public Text, public Object, public 
         void run() override;
         void update() override;
         void handleInput() override;
-        bool isClosed() const { return _close;};
+        bool isClosed();
         sf::RenderWindow _window;
         bool _close;
         void cycleLevelTexture();

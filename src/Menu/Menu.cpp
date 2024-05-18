@@ -159,3 +159,10 @@ void Menu::cycleLevelTexture()
             break;
     }
 }
+
+bool Menu::isClosed()
+{
+    _music.stop();
+    return _close;
+}
+

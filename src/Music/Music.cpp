@@ -39,3 +39,7 @@ void Music::resume() {
         _isMute = false;
     }
 }
+
+void Music::stop() {
+    _music.stop();
+}
