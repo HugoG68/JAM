@@ -13,7 +13,8 @@ SRC		=		src/main.cpp	\
 				src/Object/Object.cpp	\
 				src/Factory/Factory.cpp \
 				src/Text/Text.cpp \
-				src/Music/Music.cpp
+				src/Music/Music.cpp	\
+				src/DeadPage/DeadPage.cpp	\
 
 OBJ		=		$(SRC:.cpp=.o)
 

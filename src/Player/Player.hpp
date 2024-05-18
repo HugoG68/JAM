@@ -21,6 +21,9 @@ public:
         sf::Vector2f position = sprite.getPosition();
         return std::make_tuple(position.x, position.y);
     }
+    void setTexture(std::string textureurl);
+    void setScale(float x, float y);
+
 private:
     sf::Sprite sprite;
     sf::Texture texture;
