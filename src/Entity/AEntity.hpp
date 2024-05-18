@@ -32,8 +32,7 @@ public:
     virtual void go_left(void){
         double pos_x = std::get<0>(_pos);
         double new_pos_x = pos_x - _speed; 
-        if (new_pos_x >= 0.0)
-            std::get<0>(_pos) = new_pos_x;
+        std::get<0>(_pos) = new_pos_x;
     }
     virtual void go_right(void){
         double pos_x = std::get<0>(_pos);

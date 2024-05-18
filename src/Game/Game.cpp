@@ -98,7 +98,7 @@ void Game::updateObstacles()
         std::remove_if(_obstacles.begin(), _obstacles.end(), [this](const std::unique_ptr<Entity::IEntity>& obstacle) {
             for (int i = 0; i < (getMultiplier()); i++)
                 obstacle->go_left();
-            if (std::get<0>(obstacle->get_pos()) <= 0.01) {
+            if (std::get<0>(obstacle->get_pos()) <= -100.01) {
                 return true;
             }
             return false;
