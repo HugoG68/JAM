@@ -23,10 +23,12 @@ typedef enum {
 class IEntity {
     public:
         ~IEntity() = default;
-    virtual void go_up(void) = 0;
-    virtual void go_left(void) = 0;
-    virtual void go_right(void) = 0;
-    virtual void go_down(void) = 0;
-    virtual EntityType get_type() const = 0;
+
+        virtual void go_up(void) = 0;
+        virtual void go_left(void) = 0;
+        virtual void go_right(void) = 0;
+        virtual void go_down(void) = 0;
+        virtual EntityType get_type() const = 0;
+        virtual std::tuple<double, double> get_pos() const = 0;
 };
 }
