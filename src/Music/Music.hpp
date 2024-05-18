@@ -17,6 +17,7 @@ public:
     Music(const std::string music);
     ~Music();
 
+    void stop();
     void pause();
     void resume();
     bool _isMute;

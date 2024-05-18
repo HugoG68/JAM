@@ -81,3 +81,9 @@ void Menu::handleInput()
         }
     }
 }
+
+bool Menu::isClosed()
+{
+    _music.stop();
+    return _close;
+}
