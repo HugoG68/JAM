@@ -147,7 +147,7 @@ void Game::update()
         _scoreClock.restart();
     }
 
-    _scoretxt.setContent("Score: " + std::to_string(getScore()));
+    _scoretxt.setContent("Score: " + std::to_string(getScore()) + "\nFuel:" + std::to_string(p.get_fuel()));
     _scoretxt.draw(_window);
     updateObstacles();
 
