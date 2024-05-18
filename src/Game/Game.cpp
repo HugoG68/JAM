@@ -109,15 +109,23 @@ void Game::updateObstacles()
 
     for (auto &obstacle : _obstacles)
     {
+        std::tuple<double, double> size;
         displayObstacle(obstacle->get_pos(), obstacle->get_type());
+        if (obstacle->get_type() == Entity::EntityType::ObstacleType) {
+            sf::Vector2u textureSize = obstacleTexture.getSize();
+            size = std::make_tuple(static_cast<double>(textureSize.x) * 0.1, static_cast<double>(textureSize.y) * 0.1);
+        } else if (obstacle->get_type() == Entity::EntityType::FuelType) {
+            sf::Vector2u textureSize = fuelTexture.getSize();
+            size = std::make_tuple(static_cast<double>(textureSize.x) / _numFrames, static_cast<double>(textureSize.y));
+        }
+        obstacle->set_size(size);
         p_math.hits(obstacle);
     }
 
     if (_obstacleSpawnClock.getElapsedTime().asSeconds() > 1)
     {
         _obstacleSpawnClock.restart();
-        auto obstacle = factory.create(Entity::EntityType::ObstacleType);
-        _obstacles.push_back(obstacle);
+        _obstacles.push_back(factory.create(Entity::EntityType::ObstacleType));
     }
 
     if (_fuelSpawnClock.getElapsedTime().asSeconds() > 2)

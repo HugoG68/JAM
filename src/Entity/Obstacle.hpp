@@ -13,7 +13,9 @@ namespace Entity
 {
     class Obstacle : public AEntity {
         public:
-            Obstacle() : AEntity(start_pos(), 0.01) {};
+            Obstacle() : AEntity(start_pos(), 0.01) {
+                set_size(std::make_tuple(0.1, 0.1));
+            };
             virtual ~Obstacle() = default;
 
             virtual EntityType get_type() const override {

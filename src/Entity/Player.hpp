@@ -1,6 +1,7 @@
 
 #pragma once
 #include "AEntity.hpp"
+#include <iostream>
 #include <memory>
 
 namespace Entity
@@ -32,6 +33,11 @@ public:
         std::tuple<double, double> player_size = get_size();
         std::tuple<double, double> obstacle_size = obstacle->get_size();
         EntityType obstacle_type = obstacle->get_type();
+        std::cout << "Player pos: " << std::get<0>(player_pos) << " " << std::get<1>(player_pos) << std::endl;
+        std::cout << "Player size: " << std::get<0>(player_size) << " " << std::get<1>(player_size) << std::endl;
+        std::cout << "Obstacle pos: " << std::get<0>(obstacle_pos) << " " << std::get<1>(obstacle_pos) << std::endl;
+        std::cout << "Obstacle size: " << std::get<0>(obstacle_size) << " " << std::get<1>(obstacle_size) << std::endl;
+        std::cout << "Obstacle type: " << obstacle_type << std::endl;
         if (!(std::get<0>(player_pos) < std::get<0>(obstacle_pos) + std::get<0>(obstacle_size) &&
             std::get<0>(player_pos) + std::get<0>(player_size) > std::get<0>(obstacle_pos) &&
             std::get<1>(player_pos) < std::get<1>(obstacle_pos) + std::get<1>(obstacle_size) &&
