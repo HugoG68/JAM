@@ -46,6 +46,7 @@ class Game : public IDisplay, public IFeature, public Object, public Text {
         sf::Sound _sound;
         Object _background;
         Object _background2;
+        Object _background3;
         sf::Clock _scoreClock;
         int _multiplier;
         Text _scoretxt;

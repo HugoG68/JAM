@@ -14,6 +14,7 @@ Game::Game(int multiplier) : _window(sf::VideoMode(1920, 1080), "Crimson Clicker
     p("assets/man_sans_flamme.png"),
     _background("assets/Background_1.png", 0, 0, 1.0, 1.0),
     _background2("assets/Background_2.png", 1920, 0, 1.0, 1.0),
+    _background3("assets/Background_3.png", 3840, 0, 1.0, 1.0),
     _multiplier(multiplier),
     _scoretxt(".", "assets/Fonts/Power Punchy.otf", sf::Color::Black, 50, 10, sf::Vector2f(0.35, 0.35))
 {
@@ -41,15 +42,20 @@ void Game::run()
     while (_window.isOpen())
     {
         sf::Vector2f backgroundPosition = _background.getPosition();
-        sf::Vector2f backgroundPosition2 = _background2.getPosition();   
+        sf::Vector2f backgroundPosition2 = _background2.getPosition();
+        sf::Vector2f backgroundPosition3 = _background3.getPosition();  
         backgroundPosition.x -= 1.0f;
         backgroundPosition2.x -= 1.0f;
+        backgroundPosition3.x -= 1.0f;
         if (backgroundPosition.x <= -1920)
-            backgroundPosition.x = backgroundPosition2.x + 1920;
+            backgroundPosition.x = backgroundPosition3.x + 1920;
         if (backgroundPosition2.x <= -1920)
             backgroundPosition2.x = backgroundPosition.x + 1920;
+        if (backgroundPosition3.x <= -1920)
+            backgroundPosition3.x = backgroundPosition2.x + 1920;
         _background.setPosition(backgroundPosition);
         _background2.setPosition(backgroundPosition2);
+        _background3.setPosition(backgroundPosition3);
         handleInput();
         update();
     }
@@ -97,6 +103,7 @@ void Game::update()
     _window.clear();
     _background.drawBackground(_window);
     _background2.drawBackground(_window);
+    _background3.drawBackground(_window);
     p.draw(_window);
     p.update(0.025);
 
