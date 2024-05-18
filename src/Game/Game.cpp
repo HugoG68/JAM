@@ -11,7 +11,8 @@ Factory factory;
 
 Game::Game() : _window(sf::VideoMode(1920, 1080), "Crimson Clicker"), _score(0),
     _clickValue(1),
-    p("assets/man_sans_flamme.png")
+    p("assets/man_sans_flamme.png"),
+    _background("assets/Background.png", 0, 0, 1.2, 1.0)
 {
     _window.setFramerateLimit(60);
 }
@@ -69,7 +70,7 @@ void Game::updateObstacles()
 void Game::update()
 {
     _window.clear();
-
+    _background.drawBackground(_window);
     p.draw(_window);
     p.update(0.025);
 

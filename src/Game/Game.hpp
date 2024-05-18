@@ -9,12 +9,13 @@
 #include "../IDisplay/IDisplay.hpp"
 #include "../IFeature/IFeature.hpp"
 #include "../Player/Player.hpp"
+#include "../Object/Object.hpp"
 #include "../Factory/Factory.hpp"
 #include <vector>
 #include <memory>
 #include <algorithm>
 
-class Game : public IDisplay, public IFeature {
+class Game : public IDisplay, public IFeature, public Object {
     public:
         Game();
         ~Game();
@@ -36,6 +37,8 @@ class Game : public IDisplay, public IFeature {
         int _score;
         int _clickValue;
         Player p;
+        background_game
+        Object _background;
         std::vector<std::unique_ptr<Entity::IEntity>> _obstacles;
         sf::Clock _obstacleSpawnClock;
     private:
