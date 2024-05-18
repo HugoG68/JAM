@@ -32,7 +32,7 @@ class Game : public IDisplay, public IFeature, public Object, public Text {
         int getClickValue() const override;
         int getMultiplier() const { return _multiplier;}
 
-        void displayObstacle(std::tuple<double, double> pos);
+        void displayObstacle(std::tuple<double, double> pos, Entity::EntityType type);
         void updateObstacles();
 
     protected:
@@ -42,6 +42,7 @@ class Game : public IDisplay, public IFeature, public Object, public Text {
         Player p;
         std::vector<std::unique_ptr<Entity::IEntity>> _obstacles;
         sf::Clock _obstacleSpawnClock;
+        sf::Clock _fuelSpawnClock;
         sf::SoundBuffer _soundBuffer;
         sf::Sound _sound;
         Object _background;
@@ -52,4 +53,9 @@ class Game : public IDisplay, public IFeature, public Object, public Text {
         Text _scoretxt;
     private:
         sf::Texture obstacleTexture;
+        sf::Texture fuelTexture;
+        sf::Clock _animationClock;
+        int _currentFrame = 0;
+        float _frameDuration = 0.1f;
+        int _numFrames = 7;
 };

@@ -30,6 +30,10 @@ Game::Game(int multiplier) : _window(sf::VideoMode(1920, 1080), "Crimson Clicker
         std::cerr << "Failed to load obstacle texture from file 'assets/balle_basket.png'" << std::endl;
         exit(EXIT_FAILURE);
     }
+    if (!fuelTexture.loadFromFile("spritesheets/flamme.png")) {
+        std::cerr << "Failed to load fuel texture from file 'spritesheets/flamme.png'" << std::endl;
+        exit(EXIT_FAILURE);
+    }
 }
 
 Game::~Game()
@@ -61,14 +65,27 @@ void Game::run()
     }
 }
 
-void Game::displayObstacle(std::tuple<double, double> pos)
+void Game::displayObstacle(std::tuple<double, double> pos, Entity::EntityType type)
 {
-    sf::Sprite obstacle(obstacleTexture);
-    obstacle.setPosition(std::get<0>(pos) * 1920, std::get<1>(pos) * 1080);
+    sf::Sprite obstacle;
 
-    float scaleFactorX = 0.1f;
-    float scaleFactorY = 0.1f;
-    obstacle.setScale(scaleFactorX, scaleFactorY);
+    if (type == Entity::EntityType::ObstacleType) {
+        obstacle.setTexture(obstacleTexture);
+        obstacle.setScale(0.1f, 0.1f);
+    } else if (type == Entity::EntityType::FuelType) {
+        obstacle.setTexture(fuelTexture);
+
+        if (_animationClock.getElapsedTime().asSeconds() >= _frameDuration)
+        {
+            _currentFrame = (_currentFrame + 1) % _numFrames;
+            _animationClock.restart();
+        }
+
+        int frameWidth = fuelTexture.getSize().x / _numFrames;
+        int frameHeight = fuelTexture.getSize().y;
+        obstacle.setTextureRect(sf::IntRect(_currentFrame * frameWidth, 0, frameWidth, frameHeight));
+    }
+    obstacle.setPosition(std::get<0>(pos) * 1920, std::get<1>(pos) * 1080);
     _window.draw(obstacle);
 }
 
@@ -88,13 +105,19 @@ void Game::updateObstacles()
 
     for (auto &obstacle : _obstacles)
     {
-        displayObstacle(obstacle->get_pos());
+        displayObstacle(obstacle->get_pos(), obstacle->get_type());
     }
 
     if (_obstacleSpawnClock.getElapsedTime().asSeconds() > 1)
     {
         _obstacleSpawnClock.restart();
         _obstacles.push_back(factory.create(Entity::EntityType::ObstacleType));
+    }
+
+    if (_fuelSpawnClock.getElapsedTime().asSeconds() > 2)
+    {
+        _fuelSpawnClock.restart();
+        _obstacles.push_back(factory.create(Entity::EntityType::FuelType));
     }
 }
 

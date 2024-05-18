@@ -14,6 +14,7 @@
     #include "Entity/IEntity.hh"
     #include "Entity/Player.hpp"
     #include "Entity/Obstacle.hpp"
+    #include "Entity/Fuel.hpp"
 
     class Factory {
         private:
