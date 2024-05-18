@@ -9,8 +9,9 @@
 #include "../IDisplay/IDisplay.hpp"
 #include "../IFeature/IFeature.hpp"
 #include "../Player/Player.hpp"
+#include "../Object/Object.hpp"
 
-class Game : public IDisplay, public IFeature {
+class Game : public IDisplay, public IFeature, public Object {
     public:
         Game();
         ~Game();
@@ -29,5 +30,6 @@ class Game : public IDisplay, public IFeature {
         int _score;
         int _clickValue;
         Player p;
+        Object _background;
     private:
 };
