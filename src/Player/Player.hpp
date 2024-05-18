@@ -10,11 +10,17 @@
 #include "../IFeature/IFeature.hpp"
 #include "Entity/Player.hpp"
 
-class Player:  public Entity::AEntity {
+class Player:  public Entity::Player {
 public:
     Player(std::string textureurl);
     void update(float deltaTime);
     void draw(sf::RenderWindow &window);
+    int frameWidth;
+    int frameHeight;
+    std::tuple<double, double> get_pos() const {
+        sf::Vector2f position = sprite.getPosition();
+        return std::make_tuple(position.x, position.y);
+    }
     void setTexture(std::string textureurl);
     void setScale(float x, float y);
 
@@ -26,8 +32,6 @@ private:
 
     sf::Texture jetpackTexture;
     sf::Texture runTexture;
-    int frameWidth;
-    int frameHeight;
     int currentFrame;
     float animationTimer;
     float animationSpeed;

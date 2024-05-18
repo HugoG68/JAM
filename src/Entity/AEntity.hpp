@@ -19,6 +19,8 @@ private:
     double _speed;
 
 public:
+    const double MAX_HEIGHT = 1080.0;
+    const double MAX_WIDTH = 1920.0;
     AEntity(std::tuple<double, double> pos, double speed) :_pos(pos), _speed(speed) {};
     ~AEntity() = default;
     virtual void go_up(void) {
@@ -30,19 +32,18 @@ public:
     virtual void go_left(void){
         double pos_x = std::get<0>(_pos);
         double new_pos_x = pos_x - _speed; 
-        if (new_pos_x >= 0.0)
-            std::get<0>(_pos) = new_pos_x;
+        std::get<0>(_pos) = new_pos_x;
     }
     virtual void go_right(void){
         double pos_x = std::get<0>(_pos);
         double new_pos_x = pos_x + _speed; 
-        if (new_pos_x <= (1.0 - std::get<0>(_size)))
+        if (new_pos_x <= (MAX_WIDTH - std::get<0>(_size)))
             std::get<0>(_pos) = new_pos_x;
     }
     virtual void go_down(void){
         double pos_y = std::get<1>(_pos);
         double new_pos_y = pos_y + _speed; 
-        if (new_pos_y <= (1.0 - std::get<1>(_size)))
+        if (new_pos_y <= (MAX_HEIGHT - std::get<1>(_size)))
             std::get<1>(_pos) = new_pos_y;
     }
     virtual std::tuple<double, double> get_pos() const {

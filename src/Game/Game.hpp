@@ -64,5 +64,4 @@ class Game : public IDisplay, public IFeature, public Object, public Text {
         int _currentFrame = 0;
         float _frameDuration = 0.1f;
         int _numFrames = 7;
-        Entity::Player p_math = Entity::Player();
 };
