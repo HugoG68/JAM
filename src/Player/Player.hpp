@@ -29,4 +29,5 @@ private:
     float animationTimer;
     float animationSpeed;
     void updateAnimation(float deltaTime);
+    bool anim;
 };
