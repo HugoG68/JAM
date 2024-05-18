@@ -15,6 +15,7 @@ class AEntity : public IEntity
 {
 private:
     std::tuple<double, double> _pos;
+    std::tuple<double, double> _size;
     double _speed;
 
 public:
@@ -49,6 +50,10 @@ public:
     };
     virtual EntityType get_type() const {
         return UnknowType;
+    };
+
+    std::tuple<double, double> get_size() const {
+        return _size;
     };
 };
 
