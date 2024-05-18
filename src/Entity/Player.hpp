@@ -41,6 +41,11 @@ public:
             _is_alive = false;
             return;
         }
+        if (obstacle_type == FuelType) {
+            _fuel += FUEL_GAIN;
+            if (_fuel > 1.0)
+                _fuel = 1.0;
+        }
     }
     bool is_alive() const {
         return _is_alive;

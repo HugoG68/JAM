@@ -16,7 +16,7 @@ namespace Entity
             Obstacle() : AEntity(start_pos(), 0.01) {};
             virtual ~Obstacle() = default;
 
-            EntityType get_type() const override {
+            virtual EntityType get_type() const override {
                 return ObstacleType;
             }
         

@@ -17,6 +17,7 @@ typedef enum {
     UnknowType = -1,
     PlayerType,
     ObstacleType,
+    FuelType
 } EntityType;
 
 

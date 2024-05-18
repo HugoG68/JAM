@@ -8,6 +8,7 @@
 
 #include "../IDisplay/IDisplay.hpp"
 #include "../IFeature/IFeature.hpp"
+#include "Entity/Player.hpp"
 
 class Player {
 public:
@@ -30,4 +31,5 @@ private:
     float animationSpeed;
     void updateAnimation(float deltaTime);
     bool anim;
+    Entity::Player _player;
 };
