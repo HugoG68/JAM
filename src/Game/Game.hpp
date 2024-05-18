@@ -37,7 +37,6 @@ class Game : public IDisplay, public IFeature, public Object {
         int _score;
         int _clickValue;
         Player p;
-        background_game
         Object _background;
         std::vector<std::unique_ptr<Entity::IEntity>> _obstacles;
         sf::Clock _obstacleSpawnClock;
