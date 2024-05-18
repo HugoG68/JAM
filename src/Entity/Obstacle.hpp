@@ -13,7 +13,7 @@ namespace Entity
 {
     class Obstacle : public AEntity {
         public:
-            Obstacle() : AEntity(start_pos(), 10.0) {
+            Obstacle() : AEntity(start_pos(), 10) {
                 set_size(std::make_tuple(0.1, 0.1));
             };
             virtual ~Obstacle() = default;
@@ -28,10 +28,10 @@ namespace Entity
             std::tuple<double, double> start_pos() const {
                 static std::random_device rd;
                 static std::mt19937 gen(rd());
-                static std::uniform_real_distribution<> dis(0.2, MAX_HEIGHT);
+                static std::uniform_real_distribution<> dis(0.1, 1080);
                 
                 double random_y = dis(gen);
-                return std::make_tuple(MAX_WIDTH, random_y);
+                return std::make_tuple(1920, random_y);
             }
 };
 

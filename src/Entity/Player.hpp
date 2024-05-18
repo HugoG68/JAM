@@ -33,16 +33,25 @@ public:
         std::tuple<double, double> player_size = get_size();
         std::tuple<double, double> obstacle_size = obstacle->get_size();
         EntityType obstacle_type = obstacle->get_type();
-        std::cout << "Player pos: " << std::get<0>(player_pos) << " " << std::get<1>(player_pos) << std::endl;
-        std::cout << "Player size: " << std::get<0>(player_size) << " " << std::get<1>(player_size) << std::endl;
-        std::cout << "Obstacle pos: " << std::get<0>(obstacle_pos) << " " << std::get<1>(obstacle_pos) << std::endl;
-        std::cout << "Obstacle size: " << std::get<0>(obstacle_size) << " " << std::get<1>(obstacle_size) << std::endl;
-        std::cout << "Obstacle type: " << obstacle_type << std::endl;
-        if (!(std::get<0>(player_pos) < std::get<0>(obstacle_pos) + std::get<0>(obstacle_size) &&
-            std::get<0>(player_pos) + std::get<0>(player_size) > std::get<0>(obstacle_pos) &&
-            std::get<1>(player_pos) < std::get<1>(obstacle_pos) + std::get<1>(obstacle_size) &&
-            std::get<1>(player_pos) + std::get<1>(player_size) > std::get<1>(obstacle_pos))) {
-                return;
+
+        const double playerScaleFactor = 0.8;
+        const double obstacleScaleFactor = 0.5;
+
+        double playerHitboxWidth = std::get<0>(player_size) * playerScaleFactor;
+        double playerHitboxHeight = std::get<1>(player_size) * playerScaleFactor;
+        double playerHitboxX = std::get<0>(player_pos) + (std::get<0>(player_size) - playerHitboxWidth) / 2;
+        double playerHitboxY = std::get<1>(player_pos) + (std::get<1>(player_size) - playerHitboxHeight) / 2;
+
+        double obstacleHitboxWidth = std::get<0>(obstacle_size) * obstacleScaleFactor;
+        double obstacleHitboxHeight = std::get<1>(obstacle_size) * obstacleScaleFactor;
+        double obstacleHitboxX = std::get<0>(obstacle_pos) + (std::get<0>(obstacle_size) - obstacleHitboxWidth) / 2;
+        double obstacleHitboxY = std::get<1>(obstacle_pos) + (std::get<1>(obstacle_size) - obstacleHitboxHeight) / 2;
+
+        if (!(playerHitboxX < obstacleHitboxX + obstacleHitboxWidth &&
+            playerHitboxX + playerHitboxWidth > obstacleHitboxX &&
+            playerHitboxY < obstacleHitboxY + obstacleHitboxHeight &&
+            playerHitboxY + playerHitboxHeight > obstacleHitboxY)) {
+            return;
         }
         if (obstacle_type == ObstacleType) {
             _is_alive = false;

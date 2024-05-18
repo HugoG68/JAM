@@ -68,7 +68,6 @@ void Game::run()
 void Game::displayObstacle(std::tuple<double, double> pos, Entity::EntityType type)
 {
     sf::Sprite obstacle;
-
     if (type == Entity::EntityType::ObstacleType) {
         obstacle.setTexture(obstacleTexture);
         obstacle.setScale(0.1f, 0.1f);
@@ -85,7 +84,8 @@ void Game::displayObstacle(std::tuple<double, double> pos, Entity::EntityType ty
         int frameHeight = fuelTexture.getSize().y;
         obstacle.setTextureRect(sf::IntRect(_currentFrame * frameWidth, 0, frameWidth, frameHeight));
     }
-    obstacle.setPosition(std::get<0>(pos) * 1920, std::get<1>(pos) * 1080);
+    std::cout << "pos: " << std::get<0>(pos) << " " << std::get<1>(pos) << std::endl;
+    obstacle.setPosition(std::get<0>(pos), std::get<1>(pos));
     _window.draw(obstacle);
 }
 
