@@ -55,5 +55,8 @@ class Menu : public IDisplay, public Button, public Text, public Object, public 
         int _currentLevelIndex;
         sf::Texture _levelTextures[3];
         DifficultyType _currentDifficulty;
+        Text _soundtxt;
+        Button _plus;
+        Button _moins;
     private:
 };

@@ -24,10 +24,13 @@ Menu::Menu() : _window(sf::VideoMode(1920, 1080), "JetPack Menu", sf::Style::Def
     _isMusicPlaying(true),
     _soundBtnMute("assets/Button/Play Square Button.png", 1100, 500, 0.3, 0.3),
     _musicSettings("Music", "assets/Fonts/Power Punchy.otf", sf::Color::Black, 650, 470, sf::Vector2f(0.35, 0.35)),
-    _levelSettings("Difficulty", "assets/Fonts/Power Punchy.otf", sf::Color::Black, 650, 570, sf::Vector2f(0.35, 0.35)),
-    _level("assets/easy.png", 1100, 590, 0.3, 0.3),
+    _levelSettings("Difficulty", "assets/Fonts/Power Punchy.otf", sf::Color::Black, 650, 670, sf::Vector2f(0.35, 0.35)),
+    _level("assets/easy.png", 1100, 690, 0.3, 0.3),
     _currentLevelIndex(0),
-    _currentDifficulty(Easy)
+    _currentDifficulty(Easy),
+    _soundtxt(".", "assets/Fonts/Power Punchy.otf", sf::Color::Black, 650, 570, sf::Vector2f(0.35, 0.35)),
+    _plus("assets/Button/Up Square Button.png", 1200, 600, 0.2, 0.2),
+    _moins("assets/Button/Down Square Button.png", 980, 600, 0.2, 0.2)
 {
     _levelTextures[0].loadFromFile("assets/easy.png");
     _levelTextures[1].loadFromFile("assets/normal.png");
@@ -67,6 +70,8 @@ void Menu::update()
     _tittle.draw(_window);
     _tittle2.draw(_window);
 
+    _soundtxt.setContent("Volume:              " + std::to_string(static_cast<int>(_music.getVolume())) + "%");
+
     if (_settingsdraw == true) {
         _backsettings.drawBackground(_window);
         _closeSettings.display(_window);
@@ -74,6 +79,9 @@ void Menu::update()
         _musicSettings.draw(_window);
         _levelSettings.draw(_window);
         _level.display(_window);
+        _soundtxt.draw(_window);
+        _plus.display(_window);
+        _moins.display(_window);
         if (_isMusicPlaying) {
             _soundBtn.display(_window);
         } else {
@@ -139,6 +147,10 @@ void Menu::handleInput()
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && _level.isClicked(_window) && _settingsdraw) {
             cycleLevelTexture();
         }
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && _plus.isClicked(_window) && _settingsdraw)
+            _music.setVolume(_music.getVolume() + 10);
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && _moins.isClicked(_window) && _settingsdraw)
+            _music.setVolume(_music.getVolume() - 10);
     }
 }
 

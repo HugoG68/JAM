@@ -17,7 +17,7 @@ Music::Music(const std::string music) : _isMute(false)
     if (_music.openFromFile(music)) {
         _music.play();
         _music.setLoop(true);
-        _music.setVolume(1000);
+        _music.setVolume(100);
     }
 }
 
@@ -42,4 +42,16 @@ void Music::resume() {
 
 void Music::stop() {
     _music.stop();
+}
+
+void Music::setVolume(float volume) {
+    if (volume < 0.0f) {
+        volume = 0.0f;
+    } else if (volume > 100.0f)
+        volume = 100.0f;
+    _music.setVolume(volume);
+}
+
+float Music::getVolume() {
+    return _music.getVolume();
 }

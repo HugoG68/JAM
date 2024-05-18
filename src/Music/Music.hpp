@@ -20,6 +20,8 @@ public:
     void stop();
     void pause();
     void resume();
+    void setVolume(float volume);
+    float getVolume();
     bool _isMute;
     sf::Music _music;
 protected:
