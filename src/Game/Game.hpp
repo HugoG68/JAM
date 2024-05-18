@@ -10,13 +10,14 @@
 #include "../IFeature/IFeature.hpp"
 #include "../Player/Player.hpp"
 #include "../Object/Object.hpp"
+#include "../Text/Text.hpp"
 #include "../Factory/Factory.hpp"
 #include <vector>
 #include <memory>
 #include <algorithm>
 #include <SFML/Audio.hpp>
 
-class Game : public IDisplay, public IFeature, public Object {
+class Game : public IDisplay, public IFeature, public Object, public Text {
     public:
         Game(int multiplier);
         ~Game();
@@ -38,14 +39,16 @@ class Game : public IDisplay, public IFeature, public Object {
         sf::RenderWindow _window;
         int _score;
         int _clickValue;
-        int _multiplier;
         Player p;
-        Object _background;
         std::vector<std::unique_ptr<Entity::IEntity>> _obstacles;
         sf::Clock _obstacleSpawnClock;
         sf::SoundBuffer _soundBuffer;
         sf::Sound _sound;
+        Object _background;
         Object _background2;
+        sf::Clock _scoreClock;
+        int _multiplier;
+        Text _scoretxt;
     private:
         sf::Texture obstacleTexture;
 };

@@ -13,7 +13,9 @@ Game::Game(int multiplier) : _window(sf::VideoMode(1920, 1080), "Crimson Clicker
     _clickValue(1),
     p("assets/man_sans_flamme.png"),
     _background("assets/goodback1.jpeg", 0, 0, 1.9, 2.7),
-    _background2("assets/goodback1.jpeg", 1920, 0, 1.9, 2.7)
+    _background2("assets/goodback1.jpeg", 1920, 0, 1.9, 2.7),
+    _multiplier(multiplier),
+    _scoretxt(".", "assets/Fonts/Power Punchy.otf", sf::Color::Black, 50, 10, sf::Vector2f(0.35, 0.35))
 {
     if (!_soundBuffer.loadFromFile("assets/jetpack.ogg")) {
         std::cerr << "Critical Error: Failed to load sound file 'assets/sound.ogg'. Exiting." << std::endl;
@@ -27,10 +29,6 @@ Game::Game(int multiplier) : _window(sf::VideoMode(1920, 1080), "Crimson Clicker
         std::cerr << "Failed to load obstacle texture from file 'assets/balle_basket.png'" << std::endl;
         exit(EXIT_FAILURE);
     }
-    _sound.setBuffer(_soundBuffer);
-    _sound.setLoop(true);
-    _window.setFramerateLimit(60);
-    _multiplier = multiplier;
 }
 
 Game::~Game()
@@ -102,6 +100,13 @@ void Game::update()
     p.draw(_window);
     p.update(0.025);
 
+    if (_scoreClock.getElapsedTime().asSeconds() >= 0.5f) {
+        addScore(1);
+        _scoreClock.restart();
+    }
+
+    _scoretxt.setContent("Score: " + std::to_string(getScore()));
+    _scoretxt.draw(_window);
     updateObstacles();
 
     _window.display();
