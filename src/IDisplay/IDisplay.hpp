@@ -12,7 +12,7 @@ class IDisplay {
         virtual void run() = 0;
         virtual void update() = 0;
         virtual void handleInput() = 0;
-
+    
     protected:
     private:
 };

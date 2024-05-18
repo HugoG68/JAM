@@ -13,7 +13,7 @@ namespace Entity
 {
     class Obstacle : public AEntity {
         public:
-            Obstacle() : AEntity(start_pos(), 0.0) {};
+            Obstacle() : AEntity(start_pos(), 0.01) {};
             virtual ~Obstacle() = default;
 
             EntityType get_type() const override {
