@@ -19,7 +19,7 @@ public:
     EntityType get_type() const {
         return PlayerType;
     };
-    Player(): AEntity({0.0, 0.0}, 0.01), _fuel(1.0), _is_alive(true) {};
+    Player(): AEntity({100.0, 300.0}, 0.01), _fuel(1.0), _is_alive(true) {};
     ~Player() = default;
     void go_up(void) override {
         if (_fuel > FUEL_LOSS) {
@@ -27,7 +27,7 @@ public:
             AEntity::go_up();
         }
     }
-    void hits(const std::unique_ptr<Entity::IEntity> &obstacle) {
+    bool hits(const std::unique_ptr<Entity::IEntity> &obstacle) {
         std::tuple<double, double> player_pos = get_pos();
         std::tuple<double, double> obstacle_pos = obstacle->get_pos();
         std::tuple<double, double> player_size = get_size();
@@ -51,23 +51,35 @@ public:
             playerHitboxX + playerHitboxWidth > obstacleHitboxX &&
             playerHitboxY < obstacleHitboxY + obstacleHitboxHeight &&
             playerHitboxY + playerHitboxHeight > obstacleHitboxY)) {
-            return;
+            return false;
         }
         if (obstacle_type == ObstacleType) {
             _is_alive = false;
-            return;
+            return false;
         }
         if (obstacle_type == FuelType) {
             _fuel += FUEL_GAIN;
             if (_fuel > 1.0)
                 _fuel = 1.0;
+            return true;
         }
+        return false;
     }
 
     bool is_alive() const {
         return _is_alive;
     }
-};
+    bool have_fuel() const {
+        return _fuel > 0.0;
+    }
+    double get_fuel() const {
+        return _fuel;
+    }
+
+    void burn_fuel() {
+        _fuel -= 0.01;
+    }
+}; 
 
 
 } // namespace Entity

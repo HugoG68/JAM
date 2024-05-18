@@ -6,7 +6,7 @@
 
 #include "Player.hpp"
 
-Player::Player(std::string textureurl) : AEntity({100.0, 300.0}, 0.01), frameWidth(284), frameHeight(267), currentFrame(0), animationTimer(10.0f), animationSpeed(0.40f), anim(false) {    texture.loadFromFile(textureurl);
+Player::Player(std::string textureurl) : frameWidth(284), frameHeight(267), currentFrame(0), animationTimer(10.0f), animationSpeed(0.40f), anim(false) {    texture.loadFromFile(textureurl);
     sprite.setTexture(texture);
     sprite.setPosition(100, 300);
     sf::Vector2f scale (0.5, 0.5);
@@ -15,7 +15,8 @@ Player::Player(std::string textureurl) : AEntity({100.0, 300.0}, 0.01), frameWid
 
 void Player::update(float deltaTime) {
     sf::Vector2f position2 = sprite.getPosition();
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && have_fuel()) {
+        burn_fuel();
         texture.loadFromFile("assets/solo_man_jetpack.png");
         sprite.setTexture(texture);
         sf::Vector2f fly(0.55, 0.55);

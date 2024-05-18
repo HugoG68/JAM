@@ -91,8 +91,7 @@ void Game::displayObstacle(std::tuple<double, double> pos, Entity::EntityType ty
 
 void Game::updateObstacles()
 {
-    p_math.set_pos(p.get_pos());
-    p_math.set_size(std::make_tuple(static_cast<double>(p.frameWidth), static_cast<double>(p.frameHeight)));
+    p.set_size(std::make_tuple(static_cast<double>(p.frameWidth), static_cast<double>(p.frameHeight)));
 
     _obstacles.erase(
         std::remove_if(_obstacles.begin(), _obstacles.end(), [this](const std::unique_ptr<Entity::IEntity>& obstacle) {

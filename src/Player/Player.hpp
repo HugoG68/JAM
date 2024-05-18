@@ -10,7 +10,7 @@
 #include "../IFeature/IFeature.hpp"
 #include "Entity/Player.hpp"
 
-class Player:  public Entity::AEntity {
+class Player:  public Entity::Player {
 public:
     Player(std::string textureurl);
     void update(float deltaTime);
