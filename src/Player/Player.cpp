@@ -16,7 +16,7 @@ Player::Player(std::string textureurl) : frameWidth(284), frameHeight(267), curr
 
 void Player::update(float deltaTime) {
     sf::Vector2f position2 = sprite.getPosition();
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && position2.y < 720) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         texture.loadFromFile("assets/solo_man_jetpack.png");
         sprite.setTexture(texture);
         sf::Vector2f fly(0.55, 0.55);
