@@ -84,7 +84,6 @@ void Game::displayObstacle(std::tuple<double, double> pos, Entity::EntityType ty
         int frameHeight = fuelTexture.getSize().y;
         obstacle.setTextureRect(sf::IntRect(_currentFrame * frameWidth, 0, frameWidth, frameHeight));
     }
-    std::cout << "pos: " << std::get<0>(pos) << " " << std::get<1>(pos) << std::endl;
     obstacle.setPosition(std::get<0>(pos), std::get<1>(pos));
     _window.draw(obstacle);
 }
@@ -95,20 +94,18 @@ void Game::updateObstacles()
 
     _obstacles.erase(
         std::remove_if(_obstacles.begin(), _obstacles.end(), [this](const std::unique_ptr<Entity::IEntity>& obstacle) {
-            for (int i = 0; i < (getMultiplier()); i++)
+            for (int i = 0; i < getMultiplier(); i++)
                 obstacle->go_left();
-            if (std::get<0>(obstacle->get_pos()) <= -100.01) {
-                return true;
-            }
-            return false;
+            return std::get<0>(obstacle->get_pos()) <= -100.01;
         }),
         _obstacles.end()
     );
 
-    for (auto &obstacle : _obstacles)
-    {
+    for (auto it = _obstacles.begin(); it != _obstacles.end(); ) {
+        auto &obstacle = *it;
         std::tuple<double, double> size;
         displayObstacle(obstacle->get_pos(), obstacle->get_type());
+
         if (obstacle->get_type() == Entity::EntityType::ObstacleType) {
             sf::Vector2u textureSize = obstacleTexture.getSize();
             size = std::make_tuple(static_cast<double>(textureSize.x) * 0.1, static_cast<double>(textureSize.y) * 0.1);
@@ -117,17 +114,22 @@ void Game::updateObstacles()
             size = std::make_tuple(static_cast<double>(textureSize.x) / _numFrames, static_cast<double>(textureSize.y));
         }
         obstacle->set_size(size);
-        p.hits(obstacle);
+
+        if (p.hits(obstacle)) {
+            if (obstacle->get_type() == Entity::EntityType::FuelType) {
+                it = _obstacles.erase(it);
+                continue;
+            }
+        }
+        ++it;
     }
 
-    if (_obstacleSpawnClock.getElapsedTime().asSeconds() > 1)
-    {
+    if (_obstacleSpawnClock.getElapsedTime().asSeconds() > 1) {
         _obstacleSpawnClock.restart();
         _obstacles.push_back(factory.create(Entity::EntityType::ObstacleType));
     }
 
-    if (_fuelSpawnClock.getElapsedTime().asSeconds() > 2)
-    {
+    if (_fuelSpawnClock.getElapsedTime().asSeconds() > 2) {
         _fuelSpawnClock.restart();
         _obstacles.push_back(factory.create(Entity::EntityType::FuelType));
     }
