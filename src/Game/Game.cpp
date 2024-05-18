@@ -145,7 +145,8 @@ void Game::updateObstacles()
             deathClock.restart();
             deathClockStarted = true;
         }
-        if (deathClock.getElapsedTime().asSeconds() >= 7) {
+        if (deathClock.getElapsedTime().asSeconds() >= 4) {
+            _sound.stop();
             _close = false;
             _window.close();
         }
@@ -180,7 +181,7 @@ void Game::handleInput()
         if (event.type == sf::Event::Closed)
             _window.close();
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && p.is_alive()) {
         if (_sound.getStatus() != sf::Sound::Playing) {
             _sound.play();
         }

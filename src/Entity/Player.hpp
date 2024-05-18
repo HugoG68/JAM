@@ -10,12 +10,12 @@ class Player : public AEntity
 {
 private:
     double _fuel;
-    bool _is_alive;
 
     const double FUEL_GAIN = 0.01;
     const double FUEL_LOSS = 0.01;
 
 public:
+    bool _is_alive;
     EntityType get_type() const {
         return PlayerType;
     };
