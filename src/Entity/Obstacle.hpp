@@ -28,7 +28,7 @@ namespace Entity
             std::tuple<double, double> start_pos() const {
                 static std::random_device rd;
                 static std::mt19937 gen(rd());
-                static std::uniform_real_distribution<> dis(0.1, 700);
+                static std::uniform_real_distribution<> dis(0.1, 900);
                 
                 double random_y = dis(gen);
                 return std::make_tuple(1920, random_y);

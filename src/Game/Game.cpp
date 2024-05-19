@@ -97,7 +97,14 @@ void Game::displayObstacle(std::tuple<double, double> pos, Entity::EntityType ty
 
         int frameWidth = fuelTexture.getSize().x / _numFrames;
         int frameHeight = fuelTexture.getSize().y;
-        obstacle.setTextureRect(sf::IntRect(_currentFrame * frameWidth, 0, frameWidth, frameHeight));
+
+        int cutHeight = 400;
+        obstacle.setTextureRect(sf::IntRect(
+            _currentFrame * frameWidth,
+            cutHeight,
+            frameWidth,
+            frameHeight - 2 * cutHeight
+        ));
     }
     obstacle.setPosition(std::get<0>(pos), std::get<1>(pos));
     _window.draw(obstacle);
@@ -166,7 +173,7 @@ void Game::updateObstacles()
             dead.run();
         }
     }
-    if (_score > 249) {
+    if (_score > 100) {
         _sound.stop();
         Win _win(_scoretxt);
         _window.close();
