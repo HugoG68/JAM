@@ -37,5 +37,6 @@ class Win : public IDisplay, public Object, public Text, public Button {
         Text _tittle;
         Button _home;
         Button _restart;
+        Object _flamme;
     private:
 };

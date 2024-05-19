@@ -9,11 +9,12 @@
 
 Win::Win(Text score) : _window(sf::VideoMode(1920, 1080), "Win"),
     _background("assets/Background_1.png", 0, 0, 1.0, 1.0),
-    _tittle("You win !", "assets/Fonts/Power Punchy.otf", sf::Color::Black, 600, 200, sf::Vector2f(1.0, 1.0)),
+    _tittle("You win !", "assets/Fonts/Power Punchy.otf", sf::Color::Black, 600, 350, sf::Vector2f(1.0, 1.0)),
     _home("assets/Button/Home Square Button.png", 1600, 950, 0.6, 0.6),
-    _restart("assets/Button/Return Square Button.png", 1800, 950, 0.6, 0.6)
+    _restart("assets/Button/Return Square Button.png", 1800, 950, 0.6, 0.6),
+    _flamme("assets/flamme-olympique.png", 730, 30, 0.7, 0.7)
 {
-    sf::Vector2f pos(800, 400);
+    sf::Vector2f pos(800, 550);
     _score = score;
     _close = true;
     _score.setPosition(pos);
@@ -41,6 +42,7 @@ void Win::update()
     _home.display(_window);
     _restart.display(_window);
     _score.draw(_window);
+    _flamme.drawBackground(_window);
 
     _window.display();
 
