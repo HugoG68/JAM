@@ -151,6 +151,11 @@ void Game::updateObstacles()
             _window.close();
         }
     }
+    if (_score > 20) {
+        Win _win(_scoretxt);
+        _window.close();
+        _win.run();
+    }
 }
 
 void Game::update()
@@ -162,7 +167,7 @@ void Game::update()
     p.draw(_window);
     p.update(0.025);
 
-    if (_scoreClock.getElapsedTime().asSeconds() >= 0.5f) {
+    if (_scoreClock.getElapsedTime().asSeconds() >= 0.3f) {
         addScore(1);
         _scoreClock.restart();
     }

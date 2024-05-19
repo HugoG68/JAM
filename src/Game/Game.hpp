@@ -13,6 +13,7 @@
 #include "../Text/Text.hpp"
 #include "../Factory/Factory.hpp"
 #include "../DeadPage/DeadPage.hpp"
+#include "../WinPage/WinPage.hpp"
 #include <vector>
 #include <memory>
 #include <algorithm>

@@ -5,24 +5,26 @@
 ** Game
 */
 
-#include "DeadPage.hpp"
+#include "WinPage.hpp"
 
-Dead::Dead(Text score) : _window(sf::VideoMode(1920, 1080), "Dead"),
+Win::Win(Text score) : _window(sf::VideoMode(1920, 1080), "Win"),
     _background("assets/Background_1.png", 0, 0, 1.0, 1.0),
-    _tittle("You loose !", "assets/Fonts/Power Punchy.otf", sf::Color::Black, 400, 200, sf::Vector2f(1.0, 1.0)),
+    _tittle("You win !", "assets/Fonts/Power Punchy.otf", sf::Color::Black, 600, 200, sf::Vector2f(1.0, 1.0)),
     _home("assets/Button/Home Square Button.png", 1600, 950, 0.6, 0.6),
     _restart("assets/Button/Return Square Button.png", 1800, 950, 0.6, 0.6)
 {
+    sf::Vector2f pos(800, 400);
     _score = score;
     _close = true;
+    _score.setPosition(pos);
 }
 
-Dead::~Dead()
+Win::~Win()
 {
     _window.close();
 }
 
-void Dead::run()
+void Win::run()
 {
     while (_window.isOpen()) {
         handleInput();
@@ -30,7 +32,7 @@ void Dead::run()
     }
 }
 
-void Dead::update()
+void Win::update()
 {
     _window.clear();
 
@@ -38,6 +40,7 @@ void Dead::update()
     _tittle.draw(_window);
     _home.display(_window);
     _restart.display(_window);
+    _score.draw(_window);
 
     _window.display();
 
@@ -51,7 +54,7 @@ void Dead::update()
         _restart._sprite.setScale(0.6 , 0.6);
 }
 
-void Dead::handleInput()
+void Win::handleInput()
 {
     sf::Event event;
     while (_window.pollEvent(event)) {
@@ -71,7 +74,7 @@ void Dead::handleInput()
     }
 }
 
-bool Dead::isClosed()
+bool Win::isClosed()
 {
     return _close;
 }
