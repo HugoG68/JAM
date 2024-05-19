@@ -57,11 +57,14 @@ public:
         return _size;
     };
 
-   void set_pos(std::tuple<double, double> pos) {
+    void set_pos(std::tuple<double, double> pos) {
         _pos = pos;
     };
     void set_size(std::tuple<double, double> size) {
         _size = size;
+    };
+    virtual int get_texture_index() const {
+        return 0;
     };
 
 };

@@ -34,6 +34,14 @@ Game::Game(int multiplier) : _window(sf::VideoMode(1920, 1080), "Olympic Jet"), 
         std::cerr << "Failed to load obstacle texture from file 'assets/balle_basket.png'" << std::endl;
         exit(EXIT_FAILURE);
     }
+    if (!obstacleTexture2.loadFromFile("assets/balle_foot.png")) {
+        std::cerr << "Failed to load obstacle texture from file 'assets/balle_foot.png'" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    if (!obstacleTexture3.loadFromFile("assets/balle_rudby.png")) {
+        std::cerr << "Failed to load obstacle texture from file 'assets/balle_rudby.png'" << std::endl;
+        exit(EXIT_FAILURE);
+    }
     if (!fuelTexture.loadFromFile("spritesheets/flamme.png")) {
         std::cerr << "Failed to load fuel texture from file 'spritesheets/flamme.png'" << std::endl;
         exit(EXIT_FAILURE);
@@ -80,11 +88,16 @@ void Game::run()
     }
 }
 
-void Game::displayObstacle(std::tuple<double, double> pos, Entity::EntityType type)
+void Game::displayObstacle(std::tuple<double, double> pos, Entity::EntityType type, int textureIndex)
 {
     sf::Sprite obstacle;
     if (type == Entity::EntityType::ObstacleType) {
-        obstacle.setTexture(obstacleTexture);
+        if (textureIndex == 1)
+            obstacle.setTexture(obstacleTexture);
+        else if (textureIndex == 2)
+            obstacle.setTexture(obstacleTexture2);
+        else if (textureIndex == 3)
+            obstacle.setTexture(obstacleTexture3);
         obstacle.setTextureRect(sf::IntRect(500, 180, 800, 700));
         obstacle.setScale(0.15f, 0.15f);
     } else if (type == Entity::EntityType::FuelType) {
@@ -135,7 +148,7 @@ void Game::updateObstacles()
     for (auto it = _obstacles.begin(); it != _obstacles.end(); ) {
         auto &obstacle = *it;
         std::tuple<double, double> size;
-        displayObstacle(obstacle->get_pos(), obstacle->get_type());
+        displayObstacle(obstacle->get_pos(), obstacle->get_type(), obstacle->get_texture_index());
 
         if (obstacle->get_type() == Entity::EntityType::ObstacleType) {
             sf::Vector2u textureSize = obstacleTexture.getSize();

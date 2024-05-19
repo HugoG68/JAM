@@ -36,7 +36,7 @@ class Game : public IDisplay, public IFeature, public Object, public Text {
         int getClickValue() const override;
         int getMultiplier() const { return _multiplier;}
 
-        void displayObstacle(std::tuple<double, double> pos, Entity::EntityType type);
+        void displayObstacle(std::tuple<double, double> pos, Entity::EntityType type, int textureIndex);
         void updateObstacles();
         sf::RenderWindow _window;
         int _score;
@@ -63,6 +63,8 @@ class Game : public IDisplay, public IFeature, public Object, public Text {
         sf::Clock _scoreClock;
     private:
         sf::Texture obstacleTexture;
+        sf::Texture obstacleTexture2;
+        sf::Texture obstacleTexture3;
         sf::Texture fuelTexture;
         sf::Clock _animationClock;
         int _currentFrame = 0;
