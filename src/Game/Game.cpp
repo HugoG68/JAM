@@ -16,10 +16,11 @@ Game::Game(int multiplier) : _window(sf::VideoMode(1920, 1080), "Olympic Jet"), 
     _background2("assets/Background_2.png", 1920, 0, 1.0, 1.0),
     _background3("assets/Background_3.png", 3840, 0, 1.0, 1.0),
     _multiplier(multiplier),
-    _scoretxt(".", "assets/Fonts/Power Punchy.otf", sf::Color::Black, 50, 10, sf::Vector2f(0.35, 0.35)),
+    _scoretxt(".", "assets/Fonts/Power Punchy.otf", sf::Color::Black, 50, 20, sf::Vector2f(0.25, 0.25)),
     _close(true),
     deathClockStarted(false),
-    _win(0)
+    _win(0),
+    _backscore("assets/avion.png", -20, -90, 0.3, 0.3)
 {
     if (!_soundBuffer.loadFromFile("assets/jetpack.ogg")) {
         std::cerr << "Critical Error: Failed to load sound file 'assets/sound.ogg'. Exiting." << std::endl;
@@ -177,6 +178,7 @@ void Game::update()
     _background.drawBackground(_window);
     _background2.drawBackground(_window);
     _background3.drawBackground(_window);
+    _backscore.drawBackground(_window);
     p.draw(_window);
     p.update(0.025);
 

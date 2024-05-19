@@ -51,6 +51,7 @@ class Game : public IDisplay, public IFeature, public Object, public Text {
         bool _close;
         bool deathClockStarted;
         int _win;
+        Object _backscore;
 
     protected:
         
