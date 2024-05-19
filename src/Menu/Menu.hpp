@@ -60,5 +60,8 @@ class Menu : public IDisplay, public Button, public Text, public Object, public 
         Text _soundtxt;
         Button _plus;
         Button _moins;
+        Button _infobtn;
+        bool _infodisplay;
+        Object _info;
     private:
 };

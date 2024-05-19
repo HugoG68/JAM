@@ -28,7 +28,10 @@ Menu::Menu() : _window(sf::VideoMode(1920, 1080), "JetPack Menu", sf::Style::Def
     _currentDifficulty(Easy),
     _soundtxt(".", "assets/Fonts/Power Punchy.otf", sf::Color::Black, 650, 570, sf::Vector2f(0.35, 0.35)),
     _plus("assets/Button/Up Square Button.png", 1200, 600, 0.2, 0.2),
-    _moins("assets/Button/Down Square Button.png", 980, 600, 0.2, 0.2)
+    _moins("assets/Button/Down Square Button.png", 980, 600, 0.2, 0.2),
+    _infobtn("assets/Button/Info Square Button.png", 100, 100, 0.4, 0.4),
+    _infodisplay(false),
+    _info("assets/info.png", 0, 0, 0.9, 0.9)
 {
     _levelTextures[0].loadFromFile("assets/easy.png");
     _levelTextures[1].loadFromFile("assets/normal.png");
@@ -67,6 +70,10 @@ void Menu::update()
     _settings.display(_window);
     _tittle.draw(_window);
     _tittle2.draw(_window);
+    _infobtn.display(_window);
+
+    if (_infodisplay == true)
+        _info.drawBackground(_window);
 
     _soundtxt.setContent("Volume:              " + std::to_string(static_cast<int>(_music.getVolume())) + "%");
 
@@ -113,6 +120,10 @@ void Menu::update()
         _level._sprite.setScale(0.33 , 0.33);
     } else
         _level._sprite.setScale(0.3 , 0.3);
+    if (_infobtn.isClicked(_window)) {
+        _infobtn._sprite.setScale(0.43 , 0.43);
+    } else
+        _infobtn._sprite.setScale(0.4 , 0.4);
 }
 
 void Menu::handleInput()
@@ -154,6 +165,8 @@ void Menu::handleInput()
             _music.setVolume(_music.getVolume() + 10);
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && _moins.isClicked(_window) && _settingsdraw)
             _music.setVolume(_music.getVolume() - 10);
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && _infobtn.isClicked(_window) && _settingsdraw == false)
+            _infodisplay = !_infodisplay;
     }
 }
 
