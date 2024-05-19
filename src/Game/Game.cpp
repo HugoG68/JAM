@@ -85,7 +85,8 @@ void Game::displayObstacle(std::tuple<double, double> pos, Entity::EntityType ty
     sf::Sprite obstacle;
     if (type == Entity::EntityType::ObstacleType) {
         obstacle.setTexture(obstacleTexture);
-        obstacle.setScale(0.1f, 0.1f);
+        obstacle.setTextureRect(sf::IntRect(500, 180, 800, 700));
+        obstacle.setScale(0.15f, 0.15f);
     } else if (type == Entity::EntityType::FuelType) {
         obstacle.setTexture(fuelTexture);
 
@@ -105,6 +106,7 @@ void Game::displayObstacle(std::tuple<double, double> pos, Entity::EntityType ty
             frameWidth,
             frameHeight - 2 * cutHeight
         ));
+        obstacle.setScale(0.8f, 0.8f);
     }
     obstacle.setPosition(std::get<0>(pos), std::get<1>(pos));
     _window.draw(obstacle);
@@ -114,6 +116,13 @@ void Game::updateObstacles()
 {
     p.set_size(std::make_tuple(static_cast<double>(p.frameWidth), static_cast<double>(p.frameHeight)));
 
+    float fuelLevel = static_cast<float>(p.get_fuel());
+    _fuelBar.setSize(sf::Vector2f(20, 200 * fuelLevel));
+    _fuelBar.setPosition(50, 90 + (200 - _fuelBar.getSize().y));
+
+    _window.draw(_fuelBarBackground);
+    _window.draw(_fuelBar);
+    
     _obstacles.erase(
         std::remove_if(_obstacles.begin(), _obstacles.end(), [this](const std::unique_ptr<Entity::IEntity>& obstacle) {
             for (int i = 0; i < getMultiplier(); i++)
@@ -199,13 +208,6 @@ void Game::update()
     _scoretxt.setContent("Score: " + std::to_string(getScore()));
     _scoretxt.draw(_window);
     updateObstacles();
-
-    float fuelLevel = static_cast<float>(p.get_fuel());
-    _fuelBar.setSize(sf::Vector2f(20, 200 * fuelLevel));
-    _fuelBar.setPosition(50, 90 + (200 - _fuelBar.getSize().y));
-
-    _window.draw(_fuelBarBackground);
-    _window.draw(_fuelBar);
 
     _window.display();
 }

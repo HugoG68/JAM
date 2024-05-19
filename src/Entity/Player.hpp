@@ -44,8 +44,8 @@ public:
 
         double obstacleHitboxWidth = std::get<0>(obstacle_size) * obstacleScaleFactor;
         double obstacleHitboxHeight = std::get<1>(obstacle_size) * obstacleScaleFactor;
-        double obstacleHitboxX = std::get<0>(obstacle_pos) + (std::get<0>(obstacle_size) - obstacleHitboxWidth) / 2;
-        double obstacleHitboxY = std::get<1>(obstacle_pos) + (std::get<1>(obstacle_size) - obstacleHitboxHeight) / 2;
+        double obstacleHitboxX = std::get<0>(obstacle_pos) + (std::get<0>(obstacle_size) - obstacleHitboxWidth) / 3;
+        double obstacleHitboxY = std::get<1>(obstacle_pos) + (std::get<1>(obstacle_size) - obstacleHitboxHeight) / 3;
 
         if (!(playerHitboxX < obstacleHitboxX + obstacleHitboxWidth &&
             playerHitboxX + playerHitboxWidth > obstacleHitboxX &&
