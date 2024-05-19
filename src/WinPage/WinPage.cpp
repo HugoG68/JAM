@@ -12,7 +12,7 @@ Win::Win(Text score) : _window(sf::VideoMode(1920, 1080), "Win"),
     _tittle("You win !", "assets/Fonts/Power Punchy.otf", sf::Color::Black, 600, 350, sf::Vector2f(1.0, 1.0)),
     _home("assets/Button/Home Square Button.png", 1600, 950, 0.6, 0.6),
     _restart("assets/Button/Return Square Button.png", 1800, 950, 0.6, 0.6),
-    _flamme("assets/flamme-olympique.png", 730, 30, 0.7, 0.7)
+    _flamme("assets/jet_jo.png", 950, 30, 0.7, 0.7)
 {
     sf::Vector2f pos(800, 550);
     _score = score;

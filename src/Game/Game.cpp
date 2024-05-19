@@ -173,7 +173,7 @@ void Game::updateObstacles()
             dead.run();
         }
     }
-    if (_score > 100) {
+    if (_score > 250) {
         _sound.stop();
         Win _win(_scoretxt);
         _window.close();
