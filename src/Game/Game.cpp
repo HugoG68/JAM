@@ -61,9 +61,11 @@ void Game::run()
         sf::Vector2f backgroundPosition = _background.getPosition();
         sf::Vector2f backgroundPosition2 = _background2.getPosition();
         sf::Vector2f backgroundPosition3 = _background3.getPosition();  
-        backgroundPosition.x -= 1.0f;
-        backgroundPosition2.x -= 1.0f;
-        backgroundPosition3.x -= 1.0f;
+        if (p.is_alive()) {
+            backgroundPosition.x -= 1.0f;
+            backgroundPosition2.x -= 1.0f;
+            backgroundPosition3.x -= 1.0f;
+        }
         if (backgroundPosition.x <= -1920)
             backgroundPosition.x = backgroundPosition3.x + 1920;
         if (backgroundPosition2.x <= -1920)
@@ -164,7 +166,7 @@ void Game::updateObstacles()
             dead.run();
         }
     }
-    if (_score > 200) {
+    if (_score > 10) {
         _sound.stop();
         Win _win(_scoretxt);
         _window.close();

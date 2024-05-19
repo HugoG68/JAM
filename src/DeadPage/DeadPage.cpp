@@ -65,6 +65,7 @@ void Dead::handleInput()
         }
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && _restart.isClicked(_window)) {
             Menu _menu;
+            _menu._music.stop();
             Game _game(_menu.getCurrentDifficulty());
             _window.close();
             _game.run();
