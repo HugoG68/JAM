@@ -12,8 +12,8 @@ Menu::Menu() : _window(sf::VideoMode(1920, 1080), "JetPack Menu", sf::Style::Def
     _start("assets/Button/Start Button.png", 950, 500, 1.0, 1.0),
     _quit("assets/Button/Quit Button.png", 950, 800, 1.0, 1.0),
     _settings("assets/Button/Settings Button.png", 950, 650, 1.0, 1.0),
-    _background("assets/Olympic_Jet.png", 0, 0, 1.0, 0.9),
-    _jetback("assets/solo_man_jetpack.png", 35é0, 200, 0.6, 0.6, 30),
+    _background("assets/Olympic_Jet.png", 0, 0, 1.0, 1.0),
+    _jetback("assets/solo_man_jetpack.png", 350, 200, 0.6, 0.6, 30),
     _music("assets/sous_le_ciel_de_paris.ogg"),
     _settingsdraw(false),
     _backsettings("assets/backsettings.png", 370, 120, 1.0, 1.0),
@@ -125,6 +125,7 @@ void Menu::handleInput()
             _close = false;
             _window.close();
             if (_win == 1) {
+                _music.stop();
                 Game game(getCurrentDifficulty());
                 game.run();
             }

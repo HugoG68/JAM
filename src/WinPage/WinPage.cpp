@@ -65,6 +65,7 @@ void Win::handleInput()
          if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && _home.isClicked(_window)) {
             _window.close();
             Menu _menu;
+            _menu._music.stop();
             _menu._win = 1;
             _menu.run();
         }

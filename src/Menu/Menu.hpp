@@ -36,7 +36,6 @@ class Menu : public IDisplay, public Button, public Text, public Object, public 
         void cycleLevelTexture();
         DifficultyType getCurrentDifficulty() { return _currentDifficulty; }
         int _win;
-    protected:
         Button _start;
         Button _quit;
         Button _settings;
@@ -45,6 +44,7 @@ class Menu : public IDisplay, public Button, public Text, public Object, public 
         Object _background;
         Object _jetback;
         Music _music;
+    protected:
         bool _settingsdraw;
         Object _backsettings;
         Button _closeSettings;
