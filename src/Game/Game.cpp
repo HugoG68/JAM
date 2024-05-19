@@ -42,6 +42,14 @@ Game::Game(int multiplier) : _window(sf::VideoMode(1920, 1080), "Olympic Jet"), 
         std::cerr << "Failed to load obstacle texture from file 'assets/balle_rudby.png'" << std::endl;
         exit(EXIT_FAILURE);
     }
+    if (!obstacleTexture4.loadFromFile("assets/judoka.png")) {
+        std::cerr << "Failed to load obstacle texture from file 'assets/balle_rudby.png'" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    if (!obstacleTexture5.loadFromFile("assets/tennis.png")) {
+        std::cerr << "Failed to load obstacle texture from file 'assets/tennis.png'" << std::endl;
+        exit(EXIT_FAILURE);
+    }
     if (!fuelTexture.loadFromFile("spritesheets/flamme.png")) {
         std::cerr << "Failed to load fuel texture from file 'spritesheets/flamme.png'" << std::endl;
         exit(EXIT_FAILURE);
@@ -98,6 +106,10 @@ void Game::displayObstacle(std::tuple<double, double> pos, Entity::EntityType ty
             obstacle.setTexture(obstacleTexture2);
         else if (textureIndex == 3)
             obstacle.setTexture(obstacleTexture3);
+        else if (textureIndex == 4)
+            obstacle.setTexture(obstacleTexture4);
+        else if (textureIndex == 5)
+            obstacle.setTexture(obstacleTexture5);
         obstacle.setTextureRect(sf::IntRect(500, 180, 800, 700));
         obstacle.setScale(0.15f, 0.15f);
     } else if (type == Entity::EntityType::FuelType) {

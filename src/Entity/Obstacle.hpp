@@ -18,7 +18,7 @@ namespace Entity
                 if (get_type() == Entity::EntityType::ObstacleType) {
                     static std::random_device rd;
                     static std::mt19937 gen(rd());
-                    static std::uniform_int_distribution<> dis(1, 3);
+                    static std::uniform_int_distribution<> dis(1, 5);
                     _texture_index = dis(gen);
                 }
             };

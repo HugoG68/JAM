@@ -65,6 +65,8 @@ class Game : public IDisplay, public IFeature, public Object, public Text {
         sf::Texture obstacleTexture;
         sf::Texture obstacleTexture2;
         sf::Texture obstacleTexture3;
+        sf::Texture obstacleTexture4;
+        sf::Texture obstacleTexture5;
         sf::Texture fuelTexture;
         sf::Clock _animationClock;
         int _currentFrame = 0;
