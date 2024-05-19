@@ -17,12 +17,14 @@ void Player::update(float deltaTime) {
     sf::Vector2f position2 = sprite.getPosition();
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && have_fuel() && _is_alive) {
         burn_fuel();
-        texture.loadFromFile("assets/solo_man_jetpack.png");
-        sprite.setTexture(texture);
-        sf::Vector2f fly(0.55, 0.55);
-        sprite.setScale(fly);
-        sprite.setTextureRect(sf::IntRect(0, 0, texture.getSize().x, texture.getSize().y));
-        velocity.y = -300;
+        if (position2.y > 0.0) {
+            texture.loadFromFile("assets/solo_man_jetpack.png");
+            sprite.setTexture(texture);
+            sf::Vector2f fly(0.55, 0.55);
+            sprite.setScale(fly);
+            sprite.setTextureRect(sf::IntRect(0, 0, texture.getSize().x, texture.getSize().y));
+            velocity.y = -300;
+        }
     } else if (position2.y > 720 && !sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         sf::Vector2f run(1.1, 1.1);
         texture.loadFromFile("assets/run.png");
