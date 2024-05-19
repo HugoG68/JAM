@@ -11,8 +11,8 @@ class Player : public AEntity
 private:
     double _fuel;
 
-    const double FUEL_GAIN = 0.01;
-    const double FUEL_LOSS = 0.01;
+    const double FUEL_GAIN = 0.075;
+    const double FUEL_LOSS = 0.003;
 
 public:
     bool _is_alive;
@@ -77,7 +77,7 @@ public:
     }
 
     void burn_fuel() {
-        _fuel -= 0.001;
+        _fuel -= FUEL_LOSS;
     }
 }; 
 

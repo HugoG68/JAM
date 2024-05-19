@@ -36,6 +36,14 @@ Game::Game(int multiplier) : _window(sf::VideoMode(1920, 1080), "Olympic Jet"), 
         std::cerr << "Failed to load fuel texture from file 'spritesheets/flamme.png'" << std::endl;
         exit(EXIT_FAILURE);
     }
+
+    _fuelBarBackground.setSize(sf::Vector2f(20, 200));
+    _fuelBarBackground.setFillColor(sf::Color::Black);
+    _fuelBarBackground.setPosition(50, 90);
+
+    _fuelBar.setSize(sf::Vector2f(20, 200));
+    _fuelBar.setFillColor(sf::Color::Yellow);
+    _fuelBar.setPosition(50, 90);
 }
 
 Game::~Game()
@@ -172,9 +180,16 @@ void Game::update()
         _scoreClock.restart();
     }
 
-    _scoretxt.setContent("Score: " + std::to_string(getScore()) + "\nFuel:" + std::to_string(p.get_fuel()) + "\nALIVE: " + std::to_string(p.is_alive()));
+    _scoretxt.setContent("Score: " + std::to_string(getScore()));
     _scoretxt.draw(_window);
     updateObstacles();
+
+    float fuelLevel = static_cast<float>(p.get_fuel());
+    _fuelBar.setSize(sf::Vector2f(20, 200 * fuelLevel));
+    _fuelBar.setPosition(50, 90 + (200 - _fuelBar.getSize().y));
+
+    _window.draw(_fuelBarBackground);
+    _window.draw(_fuelBar);
 
     _window.display();
 }
