@@ -68,8 +68,7 @@ void Win::handleInput()
             _menu.run();
         }
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && _restart.isClicked(_window)) {
-            Menu _menu;
-            Game _game(_menu.getCurrentDifficulty());
+            Game _game(_game.getMultiplier());
             _window.close();
             _game.run();
         }
