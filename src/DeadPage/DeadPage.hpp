@@ -9,15 +9,18 @@
 #include "../IDisplay/IDisplay.hpp"
 #include "../IFeature/IFeature.hpp"
 #include "../Player/Player.hpp"
+#include "../Menu/Menu.hpp"
+#include "../Menu/Button.hpp"
 #include "../Object/Object.hpp"
 #include "../Text/Text.hpp"
+#include "../Game/Game.hpp"
 #include "../Factory/Factory.hpp"
 #include <vector>
 #include <memory>
 #include <algorithm>
 #include <SFML/Audio.hpp>
 
-class Dead : public IDisplay, public Object, public Text {
+class Dead : public IDisplay, public Object, public Text, public Button {
     public:
         Dead(Text score);
         ~Dead();
@@ -30,5 +33,9 @@ class Dead : public IDisplay, public Object, public Text {
         sf::RenderWindow _window;
         Text _score;
         bool _close;
+        Object _background;
+        Text _tittle;
+        Button _home;
+        Button _restart;
     private:
 };
