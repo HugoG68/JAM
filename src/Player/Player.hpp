@@ -13,6 +13,11 @@
 class Player:  public Entity::Player {
 public:
     Player(std::string textureurl);
+    Player(const Player& other);
+    Player(Player&& other) noexcept;
+    Player& operator=(const Player& other);
+    Player& operator=(Player&& other) noexcept;
+
     void update(float deltaTime);
     void draw(sf::RenderWindow &window);
     int frameWidth;

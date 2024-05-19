@@ -14,8 +14,6 @@ SRC		=		src/main.cpp	\
 				src/Factory/Factory.cpp \
 				src/Text/Text.cpp \
 				src/Music/Music.cpp	\
-				src/DeadPage/DeadPage.cpp	\
-				src/WinPage/WinPage.cpp	\
 
 OBJ		=		$(SRC:.cpp=.o)
 

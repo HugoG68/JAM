@@ -75,7 +75,12 @@ public:
     double get_fuel() const {
         return _fuel;
     }
-
+    void set_life(bool life) {
+        _is_alive = life;
+    }
+    void set_fuel(double fuel) {
+        _fuel = fuel;
+    }
     void burn_fuel() {
         _fuel -= FUEL_LOSS;
     }

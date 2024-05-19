@@ -13,12 +13,17 @@
 #include "../Text/Text.hpp"
 #include "../Menu/Menu.hpp"
 #include "../Factory/Factory.hpp"
-#include "../DeadPage/DeadPage.hpp"
-#include "../WinPage/WinPage.hpp"
+#include "../Menu/Button.hpp"
 #include <vector>
 #include <memory>
 #include <algorithm>
 #include <SFML/Audio.hpp>
+
+enum class GameState {
+    Playing,
+    Win,
+    Loose
+};
 
 class Game : public IDisplay, public IFeature, public Object, public Text {
     public:
@@ -34,10 +39,15 @@ class Game : public IDisplay, public IFeature, public Object, public Text {
         int getScore() const override;
         void setClickValue(int value) override;
         int getClickValue() const override;
-        int getMultiplier() const { return _multiplier;}
+        int getMultiplier() const { return _multiplier; }
 
         void displayObstacle(std::tuple<double, double> pos, Entity::EntityType type, int textureIndex);
         void updateObstacles();
+        void displayWinPage();
+        void drawBackground();
+        void displayLoosePage();
+
+    private:
         sf::RenderWindow _window;
         int _score;
         int _clickValue;
@@ -52,16 +62,12 @@ class Game : public IDisplay, public IFeature, public Object, public Text {
         bool deathClockStarted;
         int _win;
         Object _backscore;
-
-    protected:
-        
         std::vector<std::unique_ptr<Entity::IEntity>> _obstacles;
         sf::Clock _obstacleSpawnClock;
         sf::Clock _fuelSpawnClock;
         sf::SoundBuffer _soundBuffer;
         sf::Sound _sound;
         sf::Clock _scoreClock;
-    private:
         sf::Texture obstacleTexture;
         sf::Texture obstacleTexture2;
         sf::Texture obstacleTexture3;
@@ -74,4 +80,17 @@ class Game : public IDisplay, public IFeature, public Object, public Text {
         int _numFrames = 7;
         sf::RectangleShape _fuelBarBackground;
         sf::RectangleShape _fuelBar;
+
+        GameState _gameState;
+
+        Object _winBackground;
+        Text _winTittle;
+        Button _homeButton;
+        Button _restartButton;
+        Object _winFlamme;
+
+        Object _looseBackground;
+        Text _looseTittle;
+        Button _looseHomeButton;
+        Button _looseRestartButton;
 };

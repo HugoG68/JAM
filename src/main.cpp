@@ -8,7 +8,6 @@
 #include <iostream>
 #include "Game/Game.hpp"
 #include "Menu/Menu.hpp"
-#include "DeadPage/DeadPage.hpp"
 #include "Entity/Player.hpp"
 
 int main()

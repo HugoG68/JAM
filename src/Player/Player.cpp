@@ -13,6 +13,52 @@ Player::Player(std::string textureurl) : frameWidth(284), frameHeight(267), curr
     sprite.setScale(scale);
 }
 
+Player::Player(const Player &other) : frameWidth(other.frameWidth), frameHeight(other.frameHeight), currentFrame(other.currentFrame), animationTimer(other.animationTimer), animationSpeed(other.animationSpeed), anim(other.anim) {
+    texture = other.texture;
+    sprite = other.sprite;
+    velocity = other.velocity;
+    gravity = other.gravity;
+}
+
+Player &Player::operator=(const Player &other) {
+    if (this != &other) {
+        texture = other.texture;
+        sprite = other.sprite;
+        velocity = other.velocity;
+        gravity = other.gravity;
+        frameWidth = other.frameWidth;
+        frameHeight = other.frameHeight;
+        currentFrame = other.currentFrame;
+        animationTimer = other.animationTimer;
+        animationSpeed = other.animationSpeed;
+        anim = other.anim;
+    }
+    return *this;
+}
+
+Player::Player(Player &&other) noexcept : frameWidth(other.frameWidth), frameHeight(other.frameHeight), currentFrame(other.currentFrame), animationTimer(other.animationTimer), animationSpeed(other.animationSpeed), anim(other.anim) {
+    texture = other.texture;
+    sprite = other.sprite;
+    velocity = other.velocity;
+    gravity = other.gravity;
+}
+
+Player &Player::operator=(Player &&other) noexcept {
+    if (this != &other) {
+        texture = other.texture;
+        sprite = other.sprite;
+        velocity = other.velocity;
+        gravity = other.gravity;
+        frameWidth = other.frameWidth;
+        frameHeight = other.frameHeight;
+        currentFrame = other.currentFrame;
+        animationTimer = other.animationTimer;
+        animationSpeed = other.animationSpeed;
+        anim = other.anim;
+    }
+    return *this;
+}
+
 void Player::update(float deltaTime) {
     sf::Vector2f position2 = sprite.getPosition();
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && have_fuel() && _is_alive) {

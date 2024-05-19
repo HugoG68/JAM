@@ -20,7 +20,17 @@ Game::Game(int multiplier) : _window(sf::VideoMode(1920, 1080), "Olympic Jet"), 
     _close(true),
     deathClockStarted(false),
     _win(0),
-    _backscore("assets/avion.png", -20, -90, 0.3, 0.3)
+    _backscore("assets/avion.png", -20, -90, 0.3, 0.3),
+    _gameState(GameState::Playing),
+    _winBackground("assets/Background_1.png", 0, 0, 1.0, 1.0),
+    _winTittle("You win !", "assets/Fonts/Power Punchy.otf", sf::Color::Black, 600, 350, sf::Vector2f(1.0, 1.0)),
+    _homeButton("assets/Button/Home Square Button.png", 1600, 950, 0.6, 0.6),
+    _restartButton("assets/Button/Return Square Button.png", 1800, 950, 0.6, 0.6),
+    _winFlamme("assets/jet_jo.png", 950, 30, 0.7, 0.7),
+    _looseBackground("assets/Background_1.png", 0, 0, 1.0, 1.0),
+    _looseTittle("You loose !", "assets/Fonts/Power Punchy.otf", sf::Color::Black, 400, 200, sf::Vector2f(1.0, 1.0)),
+    _looseHomeButton("assets/Button/Home Square Button.png", 1600, 950, 0.6, 0.6),
+    _looseRestartButton("assets/Button/Return Square Button.png", 1800, 950, 0.6, 0.6)
 {
     if (!_soundBuffer.loadFromFile("assets/jetpack.ogg")) {
         std::cerr << "Critical Error: Failed to load sound file 'assets/sound.ogg'. Exiting." << std::endl;
@@ -74,25 +84,149 @@ void Game::run()
 {
     while (_window.isOpen())
     {
-        sf::Vector2f backgroundPosition = _background.getPosition();
-        sf::Vector2f backgroundPosition2 = _background2.getPosition();
-        sf::Vector2f backgroundPosition3 = _background3.getPosition();  
-        if (p.is_alive()) {
-            backgroundPosition.x -= 1.0f;
-            backgroundPosition2.x -= 1.0f;
-            backgroundPosition3.x -= 1.0f;
-        }
-        if (backgroundPosition.x <= -1920)
-            backgroundPosition.x = backgroundPosition3.x + 1920;
-        if (backgroundPosition2.x <= -1920)
-            backgroundPosition2.x = backgroundPosition.x + 1920;
-        if (backgroundPosition3.x <= -1920)
-            backgroundPosition3.x = backgroundPosition2.x + 1920;
-        _background.setPosition(backgroundPosition);
-        _background2.setPosition(backgroundPosition2);
-        _background3.setPosition(backgroundPosition3);
         handleInput();
         update();
+    }
+}
+
+void Game::drawBackground()
+{
+    sf::Vector2f backgroundPosition = _background.getPosition();
+    sf::Vector2f backgroundPosition2 = _background2.getPosition();
+    sf::Vector2f backgroundPosition3 = _background3.getPosition();  
+    backgroundPosition.x -= 1.0f;
+    backgroundPosition2.x -= 1.0f;
+    backgroundPosition3.x -= 1.0f;
+
+    if (backgroundPosition.x <= -1920)
+        backgroundPosition.x = backgroundPosition3.x + 1920;
+    if (backgroundPosition2.x <= -1920)
+        backgroundPosition2.x = backgroundPosition.x + 1920;
+    if (backgroundPosition3.x <= -1920)
+        backgroundPosition3.x = backgroundPosition2.x + 1920;
+
+    _background.setPosition(backgroundPosition);
+    _background2.setPosition(backgroundPosition2);
+    _background3.setPosition(backgroundPosition3);
+
+    _background.drawBackground(_window);
+    _background2.drawBackground(_window);
+    _background3.drawBackground(_window);
+    _backscore.drawBackground(_window);
+}
+
+void Game::update()
+{
+    _window.clear();
+
+    if (_gameState == GameState::Playing) {
+        drawBackground();
+        p.draw(_window);
+        p.update(0.025);
+
+        if (_scoreClock.getElapsedTime().asSeconds() >= 0.3f) {
+            addScore(1);
+            _scoreClock.restart();
+        }
+
+        _scoretxt.setContent("Score: " + std::to_string(getScore()));
+        _scoretxt.draw(_window);
+        updateObstacles();
+
+        if (_score > 250) {
+            _gameState = GameState::Win;
+        }
+    } else if (_gameState == GameState::Win) {
+        displayWinPage();
+    } else if (_gameState == GameState::Loose) {
+        displayLoosePage();
+    }
+
+    _window.display();
+}
+
+void Game::displayLoosePage()
+{
+    _looseBackground.drawBackground(_window);
+    _looseTittle.draw(_window);
+    _looseHomeButton.display(_window);
+    _looseRestartButton.display(_window);
+    _scoretxt.setPosition(sf::Vector2f(800, 550));
+    _scoretxt.draw(_window);
+
+    if (_looseHomeButton.isClicked(_window)) {
+        _looseHomeButton._sprite.setScale(0.7, 0.7);
+    } else {
+        _looseHomeButton._sprite.setScale(0.6, 0.6);
+    }
+
+    if (_looseRestartButton.isClicked(_window)) {
+        _looseRestartButton._sprite.setScale(0.7, 0.7);
+    } else {
+        _looseRestartButton._sprite.setScale(0.6, 0.6);
+    }
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && _looseHomeButton.isClicked(_window)) {
+        _window.close();
+        Menu _menu;
+        _menu.run();
+    }
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && _looseRestartButton.isClicked(_window)) {
+        _gameState = GameState::Playing;
+        p.set_life(1);
+        _score = 0;
+        _scoretxt.setPosition(sf::Vector2f(50, 20));
+        p.set_fuel(1);
+        p = Player("assets/man_sans_flamme.png");
+        _obstacles.clear();
+        _scoreClock.restart();
+        deathClockStarted = false;
+        _obstacleSpawnClock.restart();
+        _fuelSpawnClock.restart();
+        _sound.play();
+    }
+}
+
+void Game::displayWinPage()
+{
+    _winBackground.drawBackground(_window);
+    _winTittle.draw(_window);
+    _homeButton.display(_window);
+    _restartButton.display(_window);
+    _scoretxt.setPosition(sf::Vector2f(800, 550));
+    _scoretxt.draw(_window);
+    _winFlamme.drawBackground(_window);
+
+    if (_homeButton.isClicked(_window)) {
+        _homeButton._sprite.setScale(0.7, 0.7);
+    } else {
+        _homeButton._sprite.setScale(0.6, 0.6);
+    }
+
+    if (_restartButton.isClicked(_window)) {
+        _restartButton._sprite.setScale(0.7, 0.7);
+    } else {
+        _restartButton._sprite.setScale(0.6, 0.6);
+    }
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && _homeButton.isClicked(_window)) {
+        _window.close();
+        Menu _menu;
+        _menu.run();
+    }
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && _restartButton.isClicked(_window)) {
+        _gameState = GameState::Playing;
+        _score = 0;
+        _scoretxt.setPosition(sf::Vector2f(50, 20));
+        p.set_fuel(1);
+        p = Player("assets/man_sans_flamme.png");
+        _obstacles.clear();
+        _scoreClock.restart();
+        _obstacleSpawnClock.restart();
+        _fuelSpawnClock.restart();
+        _sound.play();
     }
 }
 
@@ -199,42 +333,11 @@ void Game::updateObstacles()
             deathClock.restart();
             deathClockStarted = true;
         }
-        if (deathClock.getElapsedTime().asSeconds() >= 4) {
-            _sound.stop();
-            _close = false;
-            _window.close();
-            Dead dead(_scoretxt);
-            dead.run();
-        }
+        if (deathClock.getElapsedTime().asSeconds() >= 4)
+            _gameState = GameState::Loose;
     }
-    if (_score > 250) {
-        _sound.stop();
-        Win _win(_scoretxt);
-        _window.close();
-        _win.run();
-    }
-}
-
-void Game::update()
-{
-    _window.clear();
-    _background.drawBackground(_window);
-    _background2.drawBackground(_window);
-    _background3.drawBackground(_window);
-    _backscore.drawBackground(_window);
-    p.draw(_window);
-    p.update(0.025);
-
-    if (_scoreClock.getElapsedTime().asSeconds() >= 0.3f) {
-        addScore(1);
-        _scoreClock.restart();
-    }
-
-    _scoretxt.setContent("Score: " + std::to_string(getScore()));
-    _scoretxt.draw(_window);
-    updateObstacles();
-
-    _window.display();
+    if (_score > 50)
+        _gameState = GameState::Win;
 }
 
 void Game::handleInput()
@@ -244,16 +347,20 @@ void Game::handleInput()
         if (event.type == sf::Event::Closed)
             _window.close();
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && p.is_alive()) {
-        if (_sound.getStatus() != sf::Sound::Playing) {
-            _sound.play();
-        }
-    } else {
-        if (_sound.getStatus() == sf::Sound::Playing) {
-            _sound.stop();
+
+    if (_gameState == GameState::Playing) {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && p.is_alive()) {
+            if (_sound.getStatus() != sf::Sound::Playing) {
+                _sound.play();
+            }
+        } else {
+            if (_sound.getStatus() == sf::Sound::Playing) {
+                _sound.stop();
+            }
         }
     }
 }
+
 
 void Game::addScore(int value)
 {
