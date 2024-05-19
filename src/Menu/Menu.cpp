@@ -126,6 +126,10 @@ void Menu::handleInput()
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && _start.isClicked(_window) && _settingsdraw == false) {
             _close = false;
             _window.close();
+            if (_win == 1) {
+                Game game(getCurrentDifficulty());
+                game.run();
+            }
         }
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && _quit.isClicked(_window) && _settingsdraw == false) {
             _window.close();

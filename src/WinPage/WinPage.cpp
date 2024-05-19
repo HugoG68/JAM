@@ -63,13 +63,14 @@ void Win::handleInput()
         if (event.type == sf::Event::Closed)
             _window.close();
          if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && _home.isClicked(_window)) {
-            Menu _menu;
             _window.close();
+            Menu _menu;
+            _menu._win = 1;
             _menu.run();
         }
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && _restart.isClicked(_window)) {
-            Game _game(_game.getMultiplier());
             _window.close();
+            Game _game(_game.getMultiplier());
             _game.run();
         }
     }

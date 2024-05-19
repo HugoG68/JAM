@@ -9,6 +9,7 @@
 
 #include "../IDisplay/IDisplay.hpp"
 #include "../Text/Text.hpp"
+#include "../Game/Game.hpp"
 #include "../Object/Object.hpp"
 #include "../Music/Music.hpp"
 #include "Button.hpp"
@@ -34,6 +35,7 @@ class Menu : public IDisplay, public Button, public Text, public Object, public 
         bool _close;
         void cycleLevelTexture();
         DifficultyType getCurrentDifficulty() { return _currentDifficulty; }
+        int _win;
     protected:
         Button _start;
         Button _quit;
