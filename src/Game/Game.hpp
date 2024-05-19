@@ -14,6 +14,7 @@
 #include "../Menu/Menu.hpp"
 #include "../Factory/Factory.hpp"
 #include "../Menu/Button.hpp"
+#include "../Flame/Flame.hpp"
 #include <vector>
 #include <memory>
 #include <algorithm>
@@ -88,9 +89,10 @@ class Game : public IDisplay, public IFeature, public Object, public Text {
         Button _homeButton;
         Button _restartButton;
         Object _winFlamme;
-
         Object _looseBackground;
         Text _looseTittle;
         Button _looseHomeButton;
         Button _looseRestartButton;
+        Flame _flame;
+        sf::Clock _flameClock;
 };

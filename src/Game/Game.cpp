@@ -30,7 +30,8 @@ Game::Game(int multiplier) : _window(sf::VideoMode(1920, 1080), "Olympic Jet"), 
     _looseBackground("assets/Background_1.png", 0, 0, 1.0, 1.0),
     _looseTittle("You loose !", "assets/Fonts/Power Punchy.otf", sf::Color::Black, 400, 200, sf::Vector2f(1.0, 1.0)),
     _looseHomeButton("assets/Button/Home Square Button.png", 1600, 950, 0.6, 0.6),
-    _looseRestartButton("assets/Button/Return Square Button.png", 1800, 950, 0.6, 0.6)
+    _looseRestartButton("assets/Button/Return Square Button.png", 1800, 950, 0.6, 0.6),
+    _flame(1060.0f, 360.0f)
 {
     if (!_soundBuffer.loadFromFile("assets/jetpack.ogg")) {
         std::cerr << "Critical Error: Failed to load sound file 'assets/sound.ogg'. Exiting." << std::endl;
@@ -197,6 +198,11 @@ void Game::displayWinPage()
     _scoretxt.setPosition(sf::Vector2f(800, 550));
     _scoretxt.draw(_window);
     _winFlamme.drawBackground(_window);
+
+    float dt = _flameClock.restart().asSeconds();
+    _flame.updateFlame(dt);
+    _flame.drawFlame(_window);
+    _window.display();
 
     if (_homeButton.isClicked(_window)) {
         _homeButton._sprite.setScale(0.7, 0.7);
