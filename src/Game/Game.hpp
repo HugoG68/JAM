@@ -11,6 +11,7 @@
 #include "../Player/Player.hpp"
 #include "../Object/Object.hpp"
 #include "../Text/Text.hpp"
+#include "../Menu/Menu.hpp"
 #include "../Factory/Factory.hpp"
 #include "../DeadPage/DeadPage.hpp"
 #include "../WinPage/WinPage.hpp"
@@ -49,6 +50,7 @@ class Game : public IDisplay, public IFeature, public Object, public Text {
         sf::Clock deathClock;
         bool _close;
         bool deathClockStarted;
+        int _win;
 
     protected:
         

@@ -21,10 +21,6 @@ int main()
     if (!menu.isClosed()) {
         Game game(menu.getCurrentDifficulty());
         game.run();
-        if (!game.isClosed()) {
-            Dead dead(game._scoretxt);
-            dead.run();
-        }
     }
     return 0;
 }

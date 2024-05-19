@@ -18,7 +18,8 @@ Game::Game(int multiplier) : _window(sf::VideoMode(1920, 1080), "Olympic Jet"), 
     _multiplier(multiplier),
     _scoretxt(".", "assets/Fonts/Power Punchy.otf", sf::Color::Black, 50, 10, sf::Vector2f(0.35, 0.35)),
     _close(true),
-    deathClockStarted(false)
+    deathClockStarted(false),
+    _win(0)
 {
     if (!_soundBuffer.loadFromFile("assets/jetpack.ogg")) {
         std::cerr << "Critical Error: Failed to load sound file 'assets/sound.ogg'. Exiting." << std::endl;
@@ -48,6 +49,7 @@ Game::Game(int multiplier) : _window(sf::VideoMode(1920, 1080), "Olympic Jet"), 
 
 Game::~Game()
 {
+    _close = true;
     _window.close();
 }
 
@@ -157,6 +159,8 @@ void Game::updateObstacles()
             _sound.stop();
             _close = false;
             _window.close();
+            Dead dead(_scoretxt);
+            dead.run();
         }
     }
     if (_score > 200) {
