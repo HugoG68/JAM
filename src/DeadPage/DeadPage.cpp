@@ -59,7 +59,7 @@ void Dead::handleInput()
             _window.close();
          if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && _home.isClicked(_window)) {
             _window.close();
-            aMenu _menu;
+            Menu _menu;
             _menu._win = 1;
             _menu.run();
         }
